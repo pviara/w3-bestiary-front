@@ -1,5 +1,7 @@
 .container {
   height: 100vh;
+  
+  animation: fadeIn ease 0.5s;
 
   .content {
     height: 100vh;
@@ -19,7 +21,7 @@
       margin-left: 2em;
 
       .lang {
-        margin-right: 1em;
+        margin-right: 1.5em;
       }
     }
 

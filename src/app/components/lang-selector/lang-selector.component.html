@@ -1,3 +1,9 @@
 <div class="container">
-  <p>LANG</p>
+  <div *ngFor="let lang of languages">
+    <img
+      draggable="false"
+      [class]="isSelected(lang) ? 'selected' : 'selectable'"
+      [src]="assembleImagePath(lang)"
+      (click)="selectLang(lang)">
+  </div>
 </div>
