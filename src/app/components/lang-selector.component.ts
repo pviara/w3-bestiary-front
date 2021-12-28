@@ -17,7 +17,7 @@ export class LangSelectorComponent implements OnInit {
   
   ngOnInit() {
     try {
-      this
+      this._selected = this
         ._localStorageService
         .lang;
 
