@@ -12,7 +12,7 @@ import { LangSelectorComponent } from './components/lang-selector/lang-selector.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
