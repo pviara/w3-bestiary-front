@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LangSelectorComponent } from './components/lang-selector/lang-selector.component';
+import { LangSelectorComponent } from './components/lang-selector.component';
+import { MonstersExplorerModule } from './containers/monsters-explorer.module';
 import { LocalStorageService } from './services/local-storage.service';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { LocalStorageService } from './services/local-storage.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MonstersExplorerModule
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent]
