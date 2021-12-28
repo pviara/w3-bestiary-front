@@ -1,18 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'lang-selector',
   templateUrl: 'lang-selector.component.html',
   styleUrls: ['lang-selector.component.scss']
 })
-export class LangSelectorComponent {
+export class LangSelectorComponent implements OnInit {
   languages = ['EN', 'FR'];
 
   private _selected = 'EN';
 
   constructor(
-    // private _localStorageService: LocalStorageService
+    private _localStorageService: LocalStorageService
   ) {}
+  
+  ngOnInit() {
+    try {
+      this
+        ._localStorageService
+        .lang;
+
+    } catch (e: unknown) {
+      this
+        ._localStorageService
+        .lang = this._selected;
+      
+    }
+  }
   
   assembleImagePath(lang: string) {
     return `../../assets/lang_${lang}.png`
@@ -33,5 +48,8 @@ export class LangSelectorComponent {
     }
 
     this._selected = lang;
+    this
+      ._localStorageService
+      .lang = this._selected;
   }
 }
