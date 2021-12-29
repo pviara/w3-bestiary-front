@@ -15,7 +15,24 @@ export class MonstersService {
     console.log('GET', `https://w3.bestiary.app/api/monster/${code}?lang=${lang}`);
     return of({
       code,
-      name: 'monster_name'
+      name: 'chien',
+      textes: {
+        description: 'Lorem ipsum...',
+        quote: {
+          author: {
+            firstname: 'alfred',
+            lastname: 'pankratz',
+            title: 'Novigrad mendicant'
+          },
+          text: "Le chien est le meilleur ami de l'homme, il paraît... mais par les temps qui courent, vaut mieux se méfier de tout le monde, même de ses amis.",
+        },
+      },
+      weakspots: {
+        bombs: [],
+        oils: [],
+        potions: [],
+        signs: []
+      }
     });
   }
 }
