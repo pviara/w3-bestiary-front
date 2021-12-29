@@ -1,3 +1,58 @@
 <div class="container">
-  <p>viewer of monster</p>
+  <div class="central">
+    <p>CENTRAL</p>
+    <p>{{ monster | json }}</p>
+  </div>
+  <div class="textes">
+    <div class="title">
+      <h1>{{ monster.name | uppercase }}</h1>
+    </div>
+    <div class="content">
+      <div class="quote">
+        <p>
+          «
+          {{ 
+            monster
+              .textes
+              .quote
+              .text
+          }}
+          »
+        </p>
+        <p class="author">
+          —
+          {{
+            monster
+              .textes
+              .quote
+              .author
+              .firstname
+          }}
+          {{
+            monster
+              .textes
+              .quote
+              .author
+              .lastname
+          }},
+          {{
+            monster
+              .textes
+              .quote
+              .author
+              .title
+          }}
+        </p>
+      </div>
+      <div class="description">
+        <p>
+          {{
+            monster
+              .textes
+              .description
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

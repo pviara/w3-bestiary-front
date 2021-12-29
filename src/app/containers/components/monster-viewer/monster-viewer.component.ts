@@ -7,9 +7,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./monster-viewer.component.scss']
 })
 export class MonsterViewerComponent {
+  monster!: any;
+  
   constructor(private _route: ActivatedRoute) {}
 
   ngOnInit() {
-    console.log(this._route.snapshot.data);
+    const { monster } = this._route.snapshot.data;
+    this.monster = monster;
+    console.log(this.monster);
   }
 }
