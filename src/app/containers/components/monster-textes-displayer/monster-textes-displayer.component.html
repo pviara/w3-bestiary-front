@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="title">
+    <h1>{{ name | uppercase }}</h1>
+  </div>
+  <div class="content">
+    <div class="quote">
+      <p>
+        «
+        {{ 
+          textes
+          .quote
+          .text
+        }}
+        »
+      </p>
+      <p class="author">
+        —
+        {{
+          textes
+            .quote
+            .author
+            .firstname
+        }}
+        {{
+          textes
+            .quote
+            .author
+            .lastname
+        }},
+        {{
+          textes
+            .quote
+            .author
+            .title
+        }}
+      </p>
+    </div>
+    <div class="description">
+      <p>
+        {{ textes.description }}
+      </p>
+    </div>
+  </div>
+</div>

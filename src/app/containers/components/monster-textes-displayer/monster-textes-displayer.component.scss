@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  
+  border: 1px solid #2b2219;
+
+  .title {
+    flex: 1;
+
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    padding: 0.5em;
+
+    border: 1px solid #2b2219;
+    
+    h1 {
+      font-weight: normal;
+      margin: 0;
+      font-size: 130%;
+    }
+  }
+
+  .content {
+    flex: 1;
+    
+    display: flex;
+    flex-direction: column;
+
+    margin: 1em;
+
+    .quote {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .description {
+      flex: 1;
+
+      margin-top: 2em;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      
+      text-align: justify;
+
+      &.author {
+        margin-top: 0.3em;
+        
+        color: #928b80;
+      }
+    }
+  }
+}
