@@ -9,7 +9,7 @@ export class MonsterResolver implements Resolve<Observable<any>> {
   
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const monsterCode = route.paramMap.get('code');
-    return this._monstersService.get(monsterCode || '');
+    return this._monstersService.getMonster(monsterCode || '');
   }
 
 }

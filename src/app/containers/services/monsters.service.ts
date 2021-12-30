@@ -10,8 +10,8 @@ export class MonstersService {
     private _localStorageService: LocalStorageService
   ) {}
 
-  get(code: string) {
-    const lang = this._localStorageService.lang;
+  getMonster(code: string) {
+    const { lang } = this._localStorageService;
     console.log('GET', `https://w3.bestiary.app/api/monster/${code}?lang=${lang}`);
     return of({
       code,
@@ -34,5 +34,22 @@ export class MonstersService {
         signs: []
       }
     });
+  }
+
+  getMenuMonsters() {
+    const { lang } = this._localStorageService;
+    console.log('GET', `https://w3.bestiary.app/api/monster?lang=${lang}`);
+    return of([
+      {
+        code: 'bear',
+        name: 'ours',
+        thumbnail: ''
+      },
+      {
+        code: 'dog',
+        name: 'chien',
+        thumbnail: ''
+      }
+    ]);
   }
 }
