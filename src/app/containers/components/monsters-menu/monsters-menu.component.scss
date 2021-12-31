@@ -1,10 +1,9 @@
 .container {
+  border: 1px solid #2b2219;
 
   .category {
     display: flex;
     flex-direction: column;
-    
-    border: 1px solid #2b2219;
   
     .category-title {
       flex: 1;
@@ -15,6 +14,12 @@
       padding: 0.5em;
   
       border: 1px solid #2b2219;
+
+      user-select: none;
+    }
+
+    &:last-child {
+      margin-bottom: 0.5em;
     }
   
     .content {
@@ -24,21 +29,25 @@
       flex-direction: column;
   
       .monster {
-        max-height: 72px;
-
         margin-top: 0.5em;
         margin-left: 0.5em;
         margin-right: 0.5em;
 
-        cursor: pointer;
-        
-        &:hover {
-          background-color: #1c1c1c;
+        &:last-child {
+          margin-bottom: 0.5em;
         }
 
-        .router-link {
+        .clickable-monster {
+          max-height: 72px;
+
           display: flex;
           flex-direction: row;
+
+          cursor: pointer;
+  
+          &:hover, &.selected {
+            background-color: #1c1c1c;
+          }
 
           .thumbnail {
             img {
@@ -54,6 +63,8 @@
           .monster-title {
             display: flex;
             align-items: center;
+
+            user-select: none;
             
             h2 {
               font-weight: normal;
