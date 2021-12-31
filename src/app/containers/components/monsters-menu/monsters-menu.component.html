@@ -3,21 +3,31 @@
     class="category"
     *ngFor="let category of categories">
 
-    <div class="category-title">
-      <h1>{{ category.name | uppercase }}</h1>
+    <div
+      class="clickable-category"
+      (click)="toggleCategory(category.name)">
+      <div class="category-title">
+        <h1>{{ category.name | uppercase }}</h1>
+      </div>
     </div>
 
-    <div class="content">
+    <div
+      class="content"
+      *ngIf="isCategorySelected(category.name)">
       <div
         class="monster"
         *ngFor="let monster of category.monsters">
 
           <div
-            class="router-link"
-            [routerLink]="monster.code">
+            class="clickable-monster"
+            [ngClass]="selectedMonster === monster.code ? 'selected' : ''"
+            [routerLink]="monster.code"
+            (click)="selectMonster(monster.code)">
             
             <div class="thumbnail">
-              <img [src]="assembleImagePath(monster.code)">
+              <img
+                draggable="false"
+                [src]="assembleImagePath(monster.code)">
             </div>
             
             <div class="monster-title">

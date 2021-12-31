@@ -41,16 +41,32 @@ export class MonstersService {
     console.log('GET', `https://w3.bestiary.app/api/monster?lang=${lang}`);
     return of([
       {
-        name: 'beasts',
+        name: 'bêtes',
         monsters: [{
           code: 'bear',
-          name: 'ours',
-          thumbnail: ''
+          name: 'ours'
         },
         {
           code: 'dog',
-          name: 'chien',
-          thumbnail: ''
+          name: 'chien'
+        }]
+      },
+      {
+        name: 'créatures hybrides',
+        monsters: [{
+          code: 'griffin',
+          name: 'griffon'
+        }]
+      },
+      {
+        name: 'créatures maudites',
+        monsters: [{
+          code: 'wearwolf',
+          name: 'loup-garou'
+        },
+        {
+          code: 'couvin',
+          name: 'couvin'
         }]
       }
     ]);
