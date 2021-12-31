@@ -1,6 +1,8 @@
 <div class="container">
   <div class="menu">
-    <monsters-menu></monsters-menu>
+    <monsters-menu
+      [categories]="categories">
+    </monsters-menu>
   </div>
   <div class="viewer">
     <router-outlet></router-outlet>

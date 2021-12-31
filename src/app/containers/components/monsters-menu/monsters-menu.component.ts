@@ -7,9 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class MonstersMenuComponent {
   @Input()
-  monsters!: any[];
-  
-  ngOnInit() {
-    console.log('initialized', this.constructor.name);
+  categories!: any[];
+
+  assembleImagePath(monsterCode: string) {
+    return `../../../../assets/bestiary/thumbnails/${monsterCode}.png`;
   }
 }

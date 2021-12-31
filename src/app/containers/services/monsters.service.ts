@@ -36,19 +36,22 @@ export class MonstersService {
     });
   }
 
-  getMenuMonsters() {
+  getMonsterCategories() {
     const { lang } = this._localStorageService;
     console.log('GET', `https://w3.bestiary.app/api/monster?lang=${lang}`);
     return of([
       {
-        code: 'bear',
-        name: 'ours',
-        thumbnail: ''
-      },
-      {
-        code: 'dog',
-        name: 'chien',
-        thumbnail: ''
+        name: 'beasts',
+        monsters: [{
+          code: 'bear',
+          name: 'ours',
+          thumbnail: ''
+        },
+        {
+          code: 'dog',
+          name: 'chien',
+          thumbnail: ''
+        }]
       }
     ]);
   }

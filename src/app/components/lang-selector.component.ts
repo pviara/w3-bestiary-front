@@ -30,7 +30,7 @@ export class LangSelectorComponent implements OnInit {
   }
   
   assembleImagePath(lang: string) {
-    return `../../assets/lang_${lang}.png`
+    return `../../assets/icons/lang/lang_${lang}.png`
   }
 
   isSelected(lang: string) {

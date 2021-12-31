@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { Resolve } from '@angular/router';
 
 @Injectable()
-export class MonstersResolver implements Resolve<Observable<any>> {
+export class MonsterCategoriesResolver implements Resolve<Observable<any>> {
   constructor(private _monstersService: MonstersService) {}
   
   resolve(): Observable<any> {
-    return this._monstersService.getMenuMonsters();
+    return this._monstersService.getMonsterCategories();
   }
 
 }

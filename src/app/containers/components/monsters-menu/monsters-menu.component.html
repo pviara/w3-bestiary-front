@@ -1,3 +1,31 @@
 <div class="container">
-  <p>MENU</p>
+  <div
+    class="category"
+    *ngFor="let category of categories">
+
+    <div class="category-title">
+      <h1>{{ category.name | uppercase }}</h1>
+    </div>
+
+    <div class="content">
+      <div
+        class="monster"
+        *ngFor="let monster of category.monsters">
+
+          <div
+            class="router-link"
+            [routerLink]="monster.code">
+            
+            <div class="thumbnail">
+              <img [src]="assembleImagePath(monster.code)">
+            </div>
+            
+            <div class="monster-title">
+              <h2>{{ monster.name | capitalize }}</h2>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
 </div>
