@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'monsters-menu',
@@ -10,9 +11,13 @@ export class MonstersMenuComponent {
   categories!: any[];
 
   selectedCategories: string[] = [];
-  
-  selectedMonster!: string;
 
+  constructor(private _route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.openCurrentMonsterCategory();
+  }
+  
   assembleImagePath(monsterCode: string) {
     return `../../../../assets/bestiary/thumbnails/${monsterCode}.png`;
   }
@@ -23,6 +28,32 @@ export class MonstersMenuComponent {
       .some(
         selectedCategory => selectedCategory === categoryName
       );
+  }
+
+  openCurrentMonsterCategory() {
+    const monsterCode = this
+      ._route
+      .snapshot
+      .firstChild
+      ?.params['code'];
+    if (!monsterCode) {
+      return;
+    }
+
+    const selectedMonsterCategory = this
+      .categories
+      .find(
+        category => category
+          .monsters
+          .some(
+            (monster: any) => monster.code === monsterCode
+          )
+      );
+    if (!selectedMonsterCategory) {
+      return;
+    }
+
+    this.toggleCategory(selectedMonsterCategory.name);
   }
 
   toggleCategory(categoryName: string) {
@@ -45,9 +76,5 @@ export class MonstersMenuComponent {
           categoryName
         );
     }
-  }
-  
-  selectMonster(monsterCode: string) {
-    this.selectedMonster = monsterCode;
   }
 }

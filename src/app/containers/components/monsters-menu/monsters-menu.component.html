@@ -20,9 +20,8 @@
 
           <div
             class="clickable-monster"
-            [ngClass]="selectedMonster === monster.code ? 'selected' : ''"
             [routerLink]="monster.code"
-            (click)="selectMonster(monster.code)">
+            routerLinkActive="selected">
             
             <div class="thumbnail">
               <img
