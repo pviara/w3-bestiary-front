@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Monster } from 'src/app/models/monster/monster';
 import { MonstersService } from '../../services/monsters.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { MonstersService } from '../../services/monsters.service';
   styleUrls: ['./monster-viewer.component.scss']
 })
 export class MonsterViewerComponent {
-  monster!: any;
+  monster!: Monster;
   
   constructor(
     private _route: ActivatedRoute,

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="menu">
+  <div *ngIf="categories" class="menu">
     <monsters-menu
       [categories]="categories">
     </monsters-menu>

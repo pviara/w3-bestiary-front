@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { MonstersByCategory } from 'src/app/models/monster/monster';
 
 @Component({
   selector: 'monsters-menu',
@@ -8,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MonstersMenuComponent {
   @Input()
-  categories!: any[];
+  categories!: MonstersByCategory[];
 
   selectedCategories: string[] = [];
 
@@ -46,7 +47,7 @@ export class MonstersMenuComponent {
         category => category
           .monsters
           .some(
-            (monster: any) => monster.code === monsterCode
+            monster => monster.code === monsterCode
           )
       );
     if (!selectedMonsterCategory) {
