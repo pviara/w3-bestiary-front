@@ -8,7 +8,7 @@ export class MonsterCategoriesResolver implements Resolve<Observable<any>> {
   constructor(private _monstersService: MonstersService) {}
   
   resolve(): Observable<any> {
-    return this._monstersService.getMonsterCategories();
+    return this._monstersService.getMonstersByCategories();
   }
 
 }

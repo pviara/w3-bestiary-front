@@ -1,6 +1,6 @@
 <div class="container">
   <div class="title">
-    <h1>{{ name | uppercase }}</h1>
+    <h1>{{ textes.name | uppercase }}</h1>
   </div>
   <div class="content">
     <div class="quote">
@@ -20,12 +20,14 @@
             .quote
             .author
             .firstname
+            | capitalize
         }}
         {{
           textes
             .quote
             .author
             .lastname
+            | capitalize
         }},
         {{
           textes

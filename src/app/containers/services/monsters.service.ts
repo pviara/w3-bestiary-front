@@ -1,74 +1,29 @@
-// // import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { of } from 'rxjs';
 
 @Injectable()
 export class MonstersService {
   constructor(
-    // // private _httpClient: HttpClient,
+    private _httpClient: HttpClient,
     private _localStorageService: LocalStorageService
   ) {}
 
   getMonster(code: string) {
     const { lang } = this._localStorageService;
-    console.log('GET', `https://w3.bestiary.app/api/monster/${code}?lang=${lang}`);
-    return of({
-      code,
-      name: 'chien',
-      textes: {
-        description: 'Lorem ipsum...',
-        quote: {
-          author: {
-            firstname: 'alfred',
-            lastname: 'pankratz',
-            title: 'Novigrad mendicant'
-          },
-          text: "Le chien est le meilleur ami de l'homme, il paraît... mais par les temps qui courent, vaut mieux se méfier de tout le monde, même de ses amis.",
-        },
-      },
-      weakspots: {
-        bombs: [],
-        oils: [],
-        potions: [],
-        signs: []
-      }
-    });
+    return this
+        ._httpClient
+        .get(
+            `http://localhost:3000/api/monster/search?code=${code}&lang=${lang}`
+        );
   }
 
-  getMonsterCategories() {
+  getMonstersByCategories() {
     const { lang } = this._localStorageService;
-    console.log('GET', `https://w3.bestiary.app/api/monster?lang=${lang}`);
-    return of([
-      {
-        name: 'bêtes',
-        monsters: [{
-          code: 'bear',
-          name: 'ours'
-        },
-        {
-          code: 'dog',
-          name: 'chien'
-        }]
-      },
-      {
-        name: 'créatures hybrides',
-        monsters: [{
-          code: 'griffin',
-          name: 'griffon'
-        }]
-      },
-      {
-        name: 'créatures maudites',
-        monsters: [{
-          code: 'wearwolf',
-          name: 'loup-garou'
-        },
-        {
-          code: 'couvin',
-          name: 'couvin'
-        }]
-      }
-    ]);
+    return this
+        ._httpClient
+        .get(
+            `http://localhost:3000/api/monster?lang=${lang}`
+        );
   }
 }
