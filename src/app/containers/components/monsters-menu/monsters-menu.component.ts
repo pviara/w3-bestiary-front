@@ -9,7 +9,7 @@ import { MonstersByCategory } from 'src/app/models/monster/monster';
 })
 export class MonstersMenuComponent {
   @Input()
-  categories!: MonstersByCategory[];
+  monsterCategories!: MonstersByCategory[];
 
   selectedCategories: string[] = [];
 
@@ -42,7 +42,7 @@ export class MonstersMenuComponent {
     }
 
     const selectedMonsterCategory = this
-      .categories
+      .monsterCategories
       .find(
         category => category
           .monsters
@@ -54,7 +54,7 @@ export class MonstersMenuComponent {
       return;
     }
 
-    this.toggleCategory(selectedMonsterCategory.categoryName);
+    this.toggleCategory(selectedMonsterCategory.category.code);
   }
 
   toggleCategory(categoryName: string) {
