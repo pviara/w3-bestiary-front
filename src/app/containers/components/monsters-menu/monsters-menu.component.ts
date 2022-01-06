@@ -53,7 +53,7 @@ export class MonstersMenuComponent {
       return;
     }
 
-    this.toggleCategory(selectedMonsterCategory.name);
+    this.toggleCategory(selectedMonsterCategory.categoryName);
   }
 
   toggleCategory(categoryName: string) {

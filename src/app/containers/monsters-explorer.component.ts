@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { LocalStorageService } from '../services/local-storage.service';
+import { MonstersService } from './services/monsters.service';
 
 @Component({
   selector: 'monsters-explorer',
@@ -9,9 +10,22 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class MonstersExplorerComponent {
   categories!: any[];
 
-  constructor(private _route: ActivatedRoute) {}
+  constructor(
+    private _localStorageService: LocalStorageService,
+    private _monstersService: MonstersService
+  ) {}
 
   ngOnInit() {
-    this.categories = this._route.snapshot.data['categories'];
+    this._localStorageService
+      .langSubject
+      .subscribe(
+        _ => {
+          this._monstersService
+            .getMonstersByCategories()
+            .subscribe(
+              (monstersByCategories: any) => this.categories = monstersByCategories
+            );
+        }
+      );
   }
 }
