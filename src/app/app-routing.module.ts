@@ -13,11 +13,10 @@ const routes: Routes = [{
     categories: MonsterCategoriesResolver
   },
   children: [{
-    canActivate: [MonsterGuard],
     component: MonsterViewerComponent,
     path: ':code',
     resolve: {
-      monster: MonsterResolver
+        monster: MonsterResolver
     }
   }]
 }];

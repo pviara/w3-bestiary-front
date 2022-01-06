@@ -10,6 +10,7 @@ import { MonsterTextesDisplayerComponent } from './components/monster-textes-dis
 import { MonsterViewerComponent } from './components/monster-viewer/monster-viewer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule
   ],
   providers: [

@@ -5,15 +5,15 @@
 
     <div
       class="clickable-category"
-      (click)="toggleCategory(category.name)">
+      (click)="toggleCategory(category.categoryName)">
       <div class="category-title">
-        <h1>{{ category.name | uppercase }}</h1>
+        <h1>{{ category.categoryName | uppercase }}</h1>
       </div>
     </div>
 
     <div
       class="content"
-      *ngIf="isCategorySelected(category.name)">
+      *ngIf="isCategorySelected(category.categoryName)">
       <div
         class="monster"
         *ngFor="let monster of category.monsters">
@@ -30,7 +30,7 @@
             </div>
             
             <div class="monster-title">
-              <h2>{{ monster.name | capitalize }}</h2>
+              <h2>{{ monster.textes.name | capitalize }}</h2>
             </div>
           </div>
 

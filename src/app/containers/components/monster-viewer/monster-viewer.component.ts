@@ -12,8 +12,11 @@ export class MonsterViewerComponent {
   constructor(private _route: ActivatedRoute) {}
 
   ngOnInit() {
-    const { monster } = this._route.snapshot.data;
-    this.monster = monster;
-    console.log(this.monster);
+    this
+      ._route
+      .data
+      .subscribe(
+        data => this.monster = data['monster']
+      );
   }
 }
