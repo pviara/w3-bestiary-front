@@ -1,22 +1,22 @@
-<div *ngIf="categories" class="container">
+<div *ngIf="monsterCategories" class="container">
   <div
     class="category"
-    *ngFor="let category of categories">
+    *ngFor="let monsterCategory of monsterCategories">
 
     <div
       class="clickable-category"
-      (click)="toggleCategory(category.categoryName)">
+      (click)="toggleCategory(monsterCategory.category.code)">
       <div class="category-title">
-        <h1>{{ category.categoryName | uppercase }}</h1>
+        <h1>{{ monsterCategory.category.name | uppercase }}</h1>
       </div>
     </div>
 
     <div
       class="content"
-      *ngIf="isCategorySelected(category.categoryName)">
+      *ngIf="isCategorySelected(monsterCategory.category.code)">
       <div
         class="monster"
-        *ngFor="let monster of category.monsters">
+        *ngFor="let monster of monsterCategory.monsters">
 
           <div
             class="clickable-monster"
