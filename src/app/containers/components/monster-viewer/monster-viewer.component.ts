@@ -43,7 +43,7 @@ export class MonsterViewerComponent {
     this._localStorageService
       .langSubject
       .subscribe(
-        lang => {
+        _ => {
           const monsterCode = this._route.snapshot.params['code'];
           if (monsterCode) {
             this._monstersService
