@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class LocalStorageService {
-  langSubject = new BehaviorSubject('EN');
+  langSubject = new BehaviorSubject(
+    this._getExistingOrDefaultLanguage()
+  );
 
   get lang() {
     const langFromStorage = this._getFromStorage('lang');
@@ -20,12 +22,12 @@ export class LocalStorageService {
     }
     const key = 'lang';
 
-    this.langSubject.next(value);
-
     if (this._getFromStorage(key)) {
       localStorage.removeItem(key);
     }
     localStorage.setItem(key, JSON.stringify(value));
+
+    this.langSubject.next(value);
   }
 
   set monsterCodes(value: string[]) {
@@ -40,6 +42,16 @@ export class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
+  private _getExistingOrDefaultLanguage() {
+    try {
+      return this.lang;
+
+    } catch (e: unknown) {
+      return 'EN';
+      
+    }
+  }
+  
   private _getFromStorage(key: string) {
     return localStorage.getItem(key);
   }

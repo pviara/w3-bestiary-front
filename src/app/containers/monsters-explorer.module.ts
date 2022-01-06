@@ -1,8 +1,6 @@
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { CommonModule } from '@angular/common';
 import { MonsterCategoriesResolver } from './resolvers/monster-categories.resolver';
-import { MonsterGuard } from './guards/monster.guard';
-import { MonsterResolver } from './resolvers/monster.resolver';
 import { MonstersExplorerComponent } from './monsters-explorer.component';
 import { MonstersMenuComponent } from './components/monsters-menu/monsters-menu.component';
 import { MonstersService } from './services/monsters.service';
@@ -31,8 +29,6 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule
   ],
   providers: [
-    MonsterGuard,
-    MonsterResolver,
     MonsterCategoriesResolver,
     MonstersService
   ]

@@ -1,6 +1,4 @@
 import { MonsterCategoriesResolver } from './containers/resolvers/monster-categories.resolver';
-import { MonsterGuard } from './containers/guards/monster.guard';
-import { MonsterResolver } from './containers/resolvers/monster.resolver';
 import { MonstersExplorerComponent } from './containers/monsters-explorer.component';
 import { MonsterViewerComponent } from './containers/components/monster-viewer/monster-viewer.component';
 import { NgModule } from '@angular/core';
@@ -14,10 +12,7 @@ const routes: Routes = [{
   },
   children: [{
     component: MonsterViewerComponent,
-    path: ':code',
-    resolve: {
-        monster: MonsterResolver
-    }
+    path: ':code'
   }]
 }];
 

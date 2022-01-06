@@ -7,7 +7,7 @@
       <p>WEAKSPOTS</p>
     </div>
   </div>
-  <div class="textes">
+  <div *ngIf="monster" class="textes">
     <monster-textes-displayer
       [name]="monster.name"
       [textes]="monster.textes">
