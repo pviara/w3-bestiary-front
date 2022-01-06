@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MonsterTextes } from 'src/app/models/monster/monster';
 
 @Component({
   selector: 'monster-textes-displayer',
@@ -7,8 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class MonsterTextesDisplayerComponent {
   @Input()
-  name!: string;
-  
-  @Input()
-  textes!: any;
+  textes!: MonsterTextes;
 }

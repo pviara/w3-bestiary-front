@@ -1,6 +1,5 @@
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { CommonModule } from '@angular/common';
-import { MonsterCategoriesResolver } from './resolvers/monster-categories.resolver';
 import { MonstersExplorerComponent } from './monsters-explorer.component';
 import { MonstersMenuComponent } from './components/monsters-menu/monsters-menu.component';
 import { MonstersService } from './services/monsters.service';
@@ -29,7 +28,6 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule
   ],
   providers: [
-    MonsterCategoriesResolver,
     MonstersService
   ]
 })

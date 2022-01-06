@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../services/local-storage.service';
+import { MonstersByCategory } from '../models/monster/monster';
 import { MonstersService } from './services/monsters.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { MonstersService } from './services/monsters.service';
   styleUrls: ['./monsters-explorer.component.scss']
 })
 export class MonstersExplorerComponent {
-  categories!: any[];
+  categories!: MonstersByCategory[];
 
   constructor(
     private _localStorageService: LocalStorageService,
@@ -23,7 +24,7 @@ export class MonstersExplorerComponent {
           this._monstersService
             .getMonstersByCategories()
             .subscribe(
-              (monstersByCategories: any) => this.categories = monstersByCategories
+              monstersByCategories => this.categories = monstersByCategories
             );
         }
       );
