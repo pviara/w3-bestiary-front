@@ -30,18 +30,6 @@ export class LocalStorageService {
     this.langSubject.next(value);
   }
 
-  set monsterCodes(value: string[]) {
-    if (!value) {
-      return;
-    }
-    const key = 'monsterCodes';
-
-    if (this._getFromStorage(key)) {
-      localStorage.removeItem(key);
-    }
-    localStorage.setItem(key, JSON.stringify(value));
-  }
-
   private _getExistingOrDefaultLanguage() {
     try {
       return this.lang;
