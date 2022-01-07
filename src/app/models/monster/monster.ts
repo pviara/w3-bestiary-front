@@ -46,9 +46,21 @@ export class MonstersByCategoryCategory {
     ) {}
 }
 
+export class MonsterByCategory {
+    constructor(
+        readonly code: string,
+        readonly textes: Pick<MonsterTextes, 'name'>
+    ) {}
+}
+
 export class MonstersByCategory {
     constructor(
         readonly category: MonstersByCategoryCategory,
-        readonly monsters: Monster[]
+        readonly monsters: MonsterByCategory[]
     ) {}
 }
+
+export type MonstersByCategoriesByLang = {
+    lang: string;
+    monsters: MonstersByCategory[];
+};
