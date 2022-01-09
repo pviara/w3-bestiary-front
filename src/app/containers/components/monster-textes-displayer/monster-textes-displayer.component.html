@@ -5,36 +5,17 @@
   <div class="content">
     <div class="quote">
       <p>
-        «
-        {{ 
-          textes
-          .quote
-          .text
-        }}
-        »
+        {{ textes.quote.text }}
       </p>
       <p class="author">
         —
-        {{
-          textes
-            .quote
-            .author
-            .firstname
-            | capitalize
-        }}
-        {{
-          textes
-            .quote
-            .author
-            .lastname
-            | capitalize
-        }},
-        {{
-          textes
-            .quote
-            .author
-            .title
-        }}
+        <ng-container *ngIf="textes.quote.author.firstname as firstname">
+          {{ firstname | capitalize }}<ng-container *ngIf="!textes.quote.author.lastname">,</ng-container>
+        </ng-container>
+        <ng-container *ngIf="textes.quote.author.lastname as lastname">
+          {{ lastname | capitalize }},
+        </ng-container>
+        {{ textes.quote.author.title }}
       </p>
     </div>
     <div class="description">
