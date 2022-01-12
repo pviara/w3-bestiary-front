@@ -1,9 +1,11 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Item, ItemsByLang } from '../models/item/item';
 import {
-  MonsterByCategory,
+  Monster,
   MonstersByCategoriesByLang,
-  MonstersByCategory
+  MonstersByCategory,
+  MonstersByLang
 } from '../models/monster/monster';
 
 @Injectable()
@@ -11,6 +13,15 @@ export class LocalStorageService {
   langSubject = new BehaviorSubject(
     this._getExistingOrDefaultLanguage()
   );
+
+  get itemsByLang(): ItemsByLang[] {
+    const itemsByLang = this._getFromStorage('itemsByLang');
+    if (!itemsByLang) {
+      throw new Error('No item by lang is stored in local storage.');
+    }
+
+    return JSON.parse(itemsByLang) as ItemsByLang[];
+  }
 
   get lang(): string {
     const langFromStorage = this._getFromStorage('lang');
@@ -22,14 +33,35 @@ export class LocalStorageService {
   }
 
   get monstersByCategoriesByLang(): MonstersByCategoriesByLang[] {
-    const monstersByCategoriesFromStorage = this._getFromStorage('monstersByCategoriesByLang');
-    if (!monstersByCategoriesFromStorage) {
+    const monstersByCategoriesByLangFromStorage = this._getFromStorage('monstersByCategoriesByLang');
+    if (!monstersByCategoriesByLangFromStorage) {
       throw new Error('No monster by category by lang is stored in local storage.');
     }
 
-    return JSON.parse(monstersByCategoriesFromStorage) as MonstersByCategoriesByLang[];
+    return JSON.parse(monstersByCategoriesByLangFromStorage) as MonstersByCategoriesByLang[];
   }
 
+  get monstersByLang(): MonstersByLang[] {
+    const monstersByLangFromStorage = this._getFromStorage('monstersByLang');
+    if (!monstersByLangFromStorage) {
+      throw new Error('No monster by lang is stored in local storage.');
+    }
+
+    return JSON.parse(monstersByLangFromStorage) as MonstersByLang[];
+  }
+
+  set itemsByLang(value: ItemsByLang[]) {
+    if (!value) {
+      return;
+    }
+    const key = 'itemsByLang';
+
+    if (this._getFromStorage(key)) {
+      localStorage.removeItem(key);
+    }
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+  
   set lang(value: string) {
     if (!value) {
       return;
@@ -56,6 +88,37 @@ export class LocalStorageService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
+  set monstersByLang(value: MonstersByLang[]) {
+    if (!value) {
+      return;
+    }
+    const key = 'monstersByLang';
+
+    if (this._getFromStorage(key)) {
+      localStorage.removeItem(key);
+    }
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  addItemsToCache(items: Item[]): void {
+    try {
+      const cached = this
+        .itemsByLang
+        .find(
+          cached => cached.lang === this.lang
+        );
+      if (cached) {
+        return;
+      }
+
+      this._addItemsByLangToCache(this.lang, items);
+      
+    } catch (e: unknown) {
+      this.itemsByLang = [];
+      this._addItemsByLangToCache(this.lang, items);
+    }
+  }
+
   addMonstersByCategoriesToCache(monstersByCategories: MonstersByCategory[]): void {
     try {
       const cached = this
@@ -76,6 +139,42 @@ export class LocalStorageService {
     }
   }
 
+  addMonsterToCache(monster: Monster): void {
+    try {
+      const cached = this
+        .monstersByLang
+        .find(
+          cached => cached.lang === this.lang
+        );
+      const cachedMonster = cached
+        ?.monsters
+        .find(
+          cachedMonster => cachedMonster.code === monster.code
+        );
+      if (cachedMonster) {
+        return;
+      }
+
+      this._addMonsterToCache(this.lang, monster, cached);
+      
+    } catch (e: unknown) {
+      this.monstersByLang = [];
+
+      this._addMonsterToCache(this.lang, monster);
+      
+    }
+  }
+
+  private _addItemsByLangToCache(lang: string, items: Item[]): void {
+    this.itemsByLang = [
+      ...this.itemsByLang,
+      {
+        lang: this.lang,
+        items: items
+      }
+    ];
+  }
+
   private _addMonstersByCategoriesByLangToCache(lang: string, monstersByCategories: MonstersByCategory[]): void {
     this.monstersByCategoriesByLang = [
       ...this.monstersByCategoriesByLang,
@@ -85,6 +184,44 @@ export class LocalStorageService {
       }
     ];
   }
+
+  private _addMonsterToCache(lang: string, monster: Monster, cached?: MonstersByLang): void {
+    if (!cached) {
+      console.log('no cached monsters for lang:', lang);
+      this.monstersByLang = [
+        ...this.monstersByLang,
+        {
+          lang: this.lang,
+          monsters: [monster]
+        }
+      ];
+    } else {
+      console.log('found cached monsters for lang:', lang);
+      const match = cached
+        .monsters
+        .find(
+          cachedMonster => cachedMonster.code === monster.code
+        );
+      if (!match) {
+        console.log(monster.code, 'does not exist in current cached monsters');
+        cached
+          .monsters
+          .push(monster);
+
+        const monstersByLangIndex = this
+          .monstersByLang
+          .findIndex(
+            cached => cached.lang === this.lang
+          );
+        console.log('index for monsters by lang:', lang, ',', monstersByLangIndex);
+        console.log('applying cached monsters:', cached);
+        const duplicate = this.monstersByLang;
+        duplicate[monstersByLangIndex] = cached;
+        this.monstersByLang = duplicate;
+        console.log('applied', this.monstersByLang[monstersByLangIndex]);
+      }
+    }
+  }
   
   private _getExistingOrDefaultLanguage(): string {
     try {
@@ -92,16 +229,6 @@ export class LocalStorageService {
 
     } catch (e: unknown) {
       return 'EN';
-      
-    }
-  }
-
-  private _getExistingOrDefaultMonstersByCategoriesByLang(): MonstersByCategoriesByLang[] {
-    try {
-      return this.monstersByCategoriesByLang;
-
-    } catch (e: unknown) {
-      return [];
       
     }
   }

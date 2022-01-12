@@ -64,3 +64,8 @@ export type MonstersByCategoriesByLang = {
     lang: string;
     monsters: MonstersByCategory[];
 };
+
+export type MonstersByLang = {
+    lang: string;
+    monsters: Monster[];
+};
