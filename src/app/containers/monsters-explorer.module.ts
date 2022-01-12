@@ -8,6 +8,8 @@ import { MonsterViewerComponent } from './components/monster-viewer/monster-view
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ItemsService } from './services/items.service';
+import { ItemsResolver } from './resolvers/items.resolver';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule
   ],
   providers: [
+    ItemsResolver,
+    ItemsService,
     MonstersService
   ]
 })
