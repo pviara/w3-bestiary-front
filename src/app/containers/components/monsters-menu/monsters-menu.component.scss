@@ -1,5 +1,5 @@
 .container {
-  border: 1px solid #2b2219;
+  border: 3px double #2b2219;
 
   .category {
     display: flex;
@@ -13,7 +13,7 @@
       margin-right: 0.5em;
       padding: 0.5em;
   
-      border: 1px solid #2b2219;
+      border: 3px double #2b2219;
 
       user-select: none;
     }

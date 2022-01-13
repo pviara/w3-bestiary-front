@@ -187,7 +187,6 @@ export class LocalStorageService {
 
   private _addMonsterToCache(lang: string, monster: Monster, cached?: MonstersByLang): void {
     if (!cached) {
-      console.log('no cached monsters for lang:', lang);
       this.monstersByLang = [
         ...this.monstersByLang,
         {
@@ -196,14 +195,12 @@ export class LocalStorageService {
         }
       ];
     } else {
-      console.log('found cached monsters for lang:', lang);
       const match = cached
         .monsters
         .find(
           cachedMonster => cachedMonster.code === monster.code
         );
       if (!match) {
-        console.log(monster.code, 'does not exist in current cached monsters');
         cached
           .monsters
           .push(monster);
@@ -213,12 +210,11 @@ export class LocalStorageService {
           .findIndex(
             cached => cached.lang === this.lang
           );
-        console.log('index for monsters by lang:', lang, ',', monstersByLangIndex);
-        console.log('applying cached monsters:', cached);
+
         const duplicate = this.monstersByLang;
         duplicate[monstersByLangIndex] = cached;
+        
         this.monstersByLang = duplicate;
-        console.log('applied', this.monstersByLang[monstersByLangIndex]);
       }
     }
   }
