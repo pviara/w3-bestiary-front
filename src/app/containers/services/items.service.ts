@@ -1,0 +1,49 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Item } from 'src/app/models/item/item';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { of, tap } from 'rxjs';
+
+@Injectable()
+export class ItemsService {
+  constructor(
+    private _httpClient: HttpClient,
+    private _localStorageService: LocalStorageService
+  ) {}
+
+  getItems() {
+    const { lang } = this._localStorageService;
+
+    const cached = this._findItemsByLang(lang);
+    if (cached) {
+      return of(cached);
+    }
+    
+    return this
+      ._httpClient
+      .get<Item[]>(
+        `http://localhost:3000/api/item?lang=${lang}`
+      ).pipe(
+        tap(
+          items => this
+            ._localStorageService
+            .addItemsToCache(items)
+        )
+      );
+  }
+
+  private _findItemsByLang(lang: string): Item[] | undefined {
+    try {
+      return this
+      ._localStorageService
+      .itemsByLang
+      .find(
+        cached => cached.lang === lang
+      )
+      ?.items;
+
+    } catch (e: unknown) {
+      return undefined;
+    }
+  }
+}
