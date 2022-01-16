@@ -10,7 +10,22 @@ export class MonsterGuard implements CanActivate {
   constructor(
     private _localStorageService: LocalStorageService,
     private _router: Router
-  ) {
+  ) { }
+
+  canActivate(route: ActivatedRouteSnapshot) {
+    const isValidCode = this
+      ._getMonsterCodes()
+      .some(
+        monsterCode => monsterCode === route.params['code']
+      );
+    if (!isValidCode) {
+      this._router.navigate(['/']);
+      return false;
+    }
+    return true;
+  }
+
+  private _getMonsterCodes(): string[] {
     let monstersByCategory: MonstersByCategory[] = [];
 
     try {
@@ -35,18 +50,7 @@ export class MonsterGuard implements CanActivate {
         ...monsterCodes
       ];
     }
-  }
 
-  canActivate(route: ActivatedRouteSnapshot) {
-    const isValidCode = this
-      ._monsterCodes
-      .some(
-        monsterCode => monsterCode === route.params['code']
-      );
-    if (!isValidCode) {
-      this._router.navigate(['/']);
-      return false;
-    }
-    return true;
+    return this._monsterCodes;
   }
 }
