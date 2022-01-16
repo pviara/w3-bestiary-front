@@ -1,4 +1,5 @@
 import { ItemsResolver } from './containers/resolvers/items.resolver';
+import { MonsterGuard } from './containers/guard/monster.guard';
 import { MonstersExplorerComponent } from './containers/monsters-explorer.component';
 import { MonsterViewerComponent } from './containers/components/monster-viewer/monster-viewer.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,7 @@ const routes: Routes = [{
   },
   children: [{
     component: MonsterViewerComponent,
+    canActivate: [MonsterGuard],
     path: ':code'
   }]
 }];
