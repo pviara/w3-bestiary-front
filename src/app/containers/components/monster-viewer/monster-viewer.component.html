@@ -3,7 +3,7 @@
     <div class="image">
       <p>IMAGE</p>
     </div>
-    <div class="weakspots">
+    <div *ngIf="monster.weakspots" class="weakspots">
       <monster-weakspots-displayer
         [weakspots]="monster.weakspots">
       </monster-weakspots-displayer>

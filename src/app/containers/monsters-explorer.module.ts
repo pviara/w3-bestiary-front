@@ -4,6 +4,7 @@ import { GetItemNamePipe } from './pipes/get-item-name.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemsService } from './services/items.service';
 import { ItemsResolver } from './resolvers/items.resolver';
+import { MonsterGuard } from './guard/monster.guard';
 import { MonstersExplorerComponent } from './monsters-explorer.component';
 import { MonstersMenuComponent } from './components/monsters-menu/monsters-menu.component';
 import { MonstersService } from './services/monsters.service';
@@ -36,7 +37,8 @@ import { RouterModule } from '@angular/router';
   providers: [
     ItemsResolver,
     ItemsService,
+    MonsterGuard,
     MonstersService
   ]
 })
-export class MonstersExplorerModule {}
+export class MonstersExplorerModule { }
