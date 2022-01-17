@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Monster } from 'src/app/models/monster/monster';
 import { MonstersService } from '../../services/monsters.service';
