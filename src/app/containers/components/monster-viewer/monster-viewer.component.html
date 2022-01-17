@@ -1,15 +1,17 @@
-<div class="container">
+<div *ngIf="monster" class="container">
   <div class="central">
     <div class="image">
-      <p>IMAGE</p>
+      <img
+        draggable="false"
+        [src]="assembleImagePath(monster.code)">
     </div>
-    <div *ngIf="monster?.weakspots" class="weakspots">
+    <div *ngIf="monster.weakspots" class="weakspots">
       <monster-weakspots-displayer
         [weakspots]="monster.weakspots">
       </monster-weakspots-displayer>
     </div>
   </div>
-  <div *ngIf="monster?.textes" class="textes">
+  <div *ngIf="monster.textes" class="textes">
     <monster-textes-displayer
       [textes]="monster.textes">
     </monster-textes-displayer>

@@ -11,16 +11,20 @@ import { MonstersService } from '../../services/monsters.service';
 })
 export class MonsterViewerComponent {
   monster!: Monster;
-  
+
   constructor(
     private _route: ActivatedRoute,
     private _localStorageService: LocalStorageService,
     private _monstersService: MonstersService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadMonsterWhenChangedCodeParam();
     this.reloadMonsterWhenLangChanged();
+  }
+
+  assembleImagePath(code: string) {
+    return `../../../../assets/bestiary/images/${code}.png`;
   }
 
   private loadMonsterWhenChangedCodeParam() {
