@@ -1,8 +1,12 @@
 .container {
   display: flex;
 
+  max-height: 100%;
+
   div {
     flex: 1;
+  
+    animation: fadeIn ease 0.5s;
 
     &.central {
       height: 55em;
@@ -18,6 +22,10 @@
       .weakspots {
         flex: 1;
       }
+    }
+
+    &.textes {
+      overflow-y: scroll;
     }
   }
 }
