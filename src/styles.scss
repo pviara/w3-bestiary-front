@@ -32,7 +32,7 @@ h1 {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 15px;
 }
 
 /* Track */
@@ -42,10 +42,14 @@ h1 {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #928b80;
+  background: #000000;
+
+  box-shadow: inset 0px 0px 10px #928b80;
+  
+  border-radius: 15px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b1a38d;
+  background: #0e0e0e;
 }
