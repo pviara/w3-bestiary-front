@@ -72,50 +72,65 @@ export class MonstersMenuComponent {
     const searchText = event?.target?.value;
     if (!searchText) {
       this.filteredMonstersByCategory = this.monsterCategories;
+      this.selectedCategories = [];
       return;
     }
 
-    this.filteredMonstersByCategory = this
-      .monsterCategories
-      .filter(
-        monsterCategory => monsterCategory
-          .monsters
-          .some(
-            monster => monster
-              .code
-              .toLowerCase()
-              .includes(
-                searchText
+    const filtered: MonstersByCategory[] = [];
+
+    for (const monsterCategory of this.monsterCategories) {
+      const isSelected = this
+        .selectedCategories
+        .some(
+          categoryCode => categoryCode === monsterCategory.category.code
+        );
+
+      const monsterMatch = monsterCategory
+        .monsters
+        .some(
+          monster => monster
+            .code
+            .toLowerCase()
+            .includes(
+              searchText
                 .toLowerCase()
-              )
-          )
-      )
-      .map(
-        matchingMonsterCategory => {
-          const monsterCategory: MonstersByCategory = {
-            category: matchingMonsterCategory.category,
-            monsters: matchingMonsterCategory
-              .monsters
-              .filter(
-                monster => monster
-                  .code
-                  .toLowerCase()
-                  .includes(
-                    searchText
-                    .toLowerCase()
-                  )
-              )
-          };
-          return monsterCategory;
+            )
+        );
+        if (!monsterMatch) {
+          if (isSelected) {
+            this.toggleCategory(monsterCategory.category.code);
+          }
+          continue;
         }
-      );
+
+        if (!isSelected) {
+          this.toggleCategory(monsterCategory.category.code);
+        }
+
+        filtered.push({
+          category: monsterCategory.category,
+          monsters: monsterCategory
+            .monsters
+            .filter(
+              monster => monster
+                .code
+                .toLowerCase()
+                .includes(
+                  searchText
+                    .toLowerCase()
+                )
+            )
+        });
+    }
+
+    this.filteredMonstersByCategory = filtered;
   }
 
-  toggleCategory(categoryName: string) {
+  toggleCategory(categoryCode: string) {
     const existingItem = this
       .selectedCategories
       .findIndex(
-        selectedCategory => selectedCategory === categoryName
+        selectedCategory => selectedCategory === categoryCode
       );
     if (this.selectedCategories[existingItem]) {
       this
@@ -128,7 +143,7 @@ export class MonstersMenuComponent {
       this
         .selectedCategories
         .push(
-          categoryName
+          categoryCode
         );
     }
   }
