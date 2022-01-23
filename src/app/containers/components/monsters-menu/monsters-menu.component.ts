@@ -93,7 +93,8 @@ export class MonstersMenuComponent {
         .monsters
         .some(
           monster => monster
-            .code
+            .textes
+            .name
             .toLowerCase()
             .includes(
               searchText
@@ -117,7 +118,8 @@ export class MonstersMenuComponent {
             .monsters
             .filter(
               monster => monster
-                .code
+                .textes
+                .name
                 .toLowerCase()
                 .includes(
                   searchText
