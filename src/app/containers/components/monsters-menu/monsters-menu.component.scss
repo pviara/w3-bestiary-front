@@ -1,6 +1,28 @@
 .container {
   border: 3px double #2b2219;
 
+  .searchbar {
+    display: flex;
+    
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+
+    input {
+      flex: 1;
+
+      padding: 0.3em;
+      
+      background-color: #000;
+      border: 1px solid #2b2219;
+
+      color: #a09d9a;
+      font-size: 120%;
+
+      outline: none;
+    }
+  }
+
   .category {
     display: flex;
     flex-direction: column;

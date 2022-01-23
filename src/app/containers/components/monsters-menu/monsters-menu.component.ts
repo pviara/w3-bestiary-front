@@ -1,6 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, Input } from '@angular/core';
 import { MonstersByCategory } from 'src/app/models/monster/monster';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'monsters-menu',
@@ -11,12 +12,18 @@ export class MonstersMenuComponent {
   @Input()
   monsterCategories!: MonstersByCategory[];
 
+  searchPlaceholder = 'Search by name';
+  
   selectedCategories: string[] = [];
 
-  constructor(private _route: ActivatedRoute) {}
+  constructor(
+    private _localStorageService: LocalStorageService,
+    private _route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.openCurrentMonsterCategory();
+    this._computeSearchBarPlaceholder();
   }
   
   assembleImagePath(monsterCode: string) {
@@ -77,5 +84,16 @@ export class MonstersMenuComponent {
           categoryName
         );
     }
+  }
+
+  private _computeSearchBarPlaceholder() {
+    this
+      ._localStorageService
+      .langSubject
+      .subscribe(
+        lang => this.searchPlaceholder = lang === 'EN'
+          ? 'Search by name'
+          : 'Rechercher par nom'
+      );
   }
 }
