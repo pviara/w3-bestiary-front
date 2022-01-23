@@ -2,12 +2,13 @@
   <div class="searchbar">
     <input
       type="text"
-      [placeholder]="searchPlaceholder + '...'">
+      [placeholder]="searchPlaceholder + '...'"
+      (input)="search($event)">
   </div>
   
   <div
     class="category"
-    *ngFor="let monsterCategory of monsterCategories">
+    *ngFor="let monsterCategory of filteredMonstersByCategory">
 
     <div
       class="clickable-category"
