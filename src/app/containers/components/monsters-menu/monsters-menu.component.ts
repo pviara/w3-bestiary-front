@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, Input } from '@angular/core';
-import { MonstersByCategory } from 'src/app/models/monster/monster';
+import { MonsterByCategory, MonstersByCategory } from 'src/app/models/monster/monster';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   styleUrls: ['./monsters-menu.component.scss']
 })
 export class MonstersMenuComponent {
+  filteredMonstersByCategory!: MonstersByCategory[];
+  
   @Input()
   monsterCategories!: MonstersByCategory[];
 
@@ -22,6 +24,8 @@ export class MonstersMenuComponent {
   ) {}
 
   ngOnInit() {
+    this.filteredMonstersByCategory = this.monsterCategories;
+    
     this.openCurrentMonsterCategory();
     this._computeSearchBarPlaceholder();
   }
@@ -62,6 +66,49 @@ export class MonstersMenuComponent {
     }
 
     this.toggleCategory(selectedMonsterCategory.category.code);
+  }
+
+  search(event: any) {
+    const searchText = event?.target?.value;
+    if (!searchText) {
+      this.filteredMonstersByCategory = this.monsterCategories;
+      return;
+    }
+
+    this.filteredMonstersByCategory = this
+      .monsterCategories
+      .filter(
+        monsterCategory => monsterCategory
+          .monsters
+          .some(
+            monster => monster
+              .code
+              .toLowerCase()
+              .includes(
+                searchText
+                .toLowerCase()
+              )
+          )
+      )
+      .map(
+        matchingMonsterCategory => {
+          const monsterCategory: MonstersByCategory = {
+            category: matchingMonsterCategory.category,
+            monsters: matchingMonsterCategory
+              .monsters
+              .filter(
+                monster => monster
+                  .code
+                  .toLowerCase()
+                  .includes(
+                    searchText
+                    .toLowerCase()
+                  )
+              )
+          };
+          return monsterCategory;
+        }
+      );
   }
 
   toggleCategory(categoryName: string) {
