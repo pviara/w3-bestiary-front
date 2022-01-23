@@ -1,4 +1,10 @@
 <div *ngIf="monsterCategories" class="container">
+  <div class="searchbar">
+    <input
+      type="text"
+      [placeholder]="searchPlaceholder + '...'">
+  </div>
+  
   <div
     class="category"
     *ngFor="let monsterCategory of monsterCategories">
