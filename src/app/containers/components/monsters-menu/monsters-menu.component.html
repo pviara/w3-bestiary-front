@@ -5,43 +5,50 @@
       [placeholder]="searchPlaceholder + '...'"
       (input)="search($event)">
   </div>
+
+  <ng-container *ngIf="filteredMonstersByCategory.length > 0; else notFoundMonster">
+    <div
+      class="category"
+      *ngFor="let monsterCategory of filteredMonstersByCategory">
   
-  <div
-    class="category"
-    *ngFor="let monsterCategory of filteredMonstersByCategory">
-
-    <div
-      class="clickable-category"
-      (click)="toggleCategory(monsterCategory.category.code)">
-      <div class="category-title">
-        <h1>{{ monsterCategory.category.name | uppercase }}</h1>
-      </div>
-    </div>
-
-    <div
-      class="content"
-      *ngIf="isCategorySelected(monsterCategory.category.code)">
       <div
-        class="monster"
-        *ngFor="let monster of monsterCategory.monsters">
-
-          <div
-            class="clickable-monster"
-            [routerLink]="monster.code"
-            routerLinkActive="selected">
-            
-            <div class="thumbnail">
-              <img
-                draggable="false"
-                [src]="assembleImagePath(monster.code)">
+        class="clickable-category"
+        (click)="toggleCategory(monsterCategory.category.code)">
+        <div class="category-title">
+          <h1>{{ monsterCategory.category.name | uppercase }}</h1>
+        </div>
+      </div>
+  
+      <div
+        class="content"
+        *ngIf="isCategorySelected(monsterCategory.category.code)">
+        <div
+          class="monster"
+          *ngFor="let monster of monsterCategory.monsters">
+  
+            <div
+              class="clickable-monster"
+              [routerLink]="monster.code"
+              routerLinkActive="selected">
+              
+              <div class="thumbnail">
+                <img
+                  draggable="false"
+                  [src]="assembleImagePath(monster.code)">
+              </div>
+              
+              <div class="monster-title">
+                <h2>{{ monster.textes.name | capitalize }}</h2>
+              </div>
             </div>
-            
-            <div class="monster-title">
-              <h2>{{ monster.textes.name | capitalize }}</h2>
-            </div>
-          </div>
-
+  
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #notFoundMonster>
+    <p class="not-found-monster">
+      {{ notFoundMonsterMessage }}.
+    </p>
+  </ng-template>
 </div>

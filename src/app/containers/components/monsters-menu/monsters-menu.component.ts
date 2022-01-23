@@ -14,6 +14,8 @@ export class MonstersMenuComponent {
   @Input()
   monsterCategories!: MonstersByCategory[];
 
+  notFoundMonsterMessage = 'No monster was found';
+
   searchPlaceholder = 'Search by name';
   
   selectedCategories: string[] = [];
@@ -27,6 +29,7 @@ export class MonstersMenuComponent {
     this.filteredMonstersByCategory = this.monsterCategories;
     
     this.openCurrentMonsterCategory();
+    this._computeNotFoundMonsterMessage();
     this._computeSearchBarPlaceholder();
   }
   
@@ -73,6 +76,7 @@ export class MonstersMenuComponent {
     if (!searchText) {
       this.filteredMonstersByCategory = this.monsterCategories;
       this.selectedCategories = [];
+      this.openCurrentMonsterCategory();
       return;
     }
 
@@ -146,6 +150,17 @@ export class MonstersMenuComponent {
           categoryCode
         );
     }
+  }
+
+  private _computeNotFoundMonsterMessage() {
+    this
+      ._localStorageService
+      .langSubject
+      .subscribe(
+        lang => this.notFoundMonsterMessage = lang === 'EN'
+          ? 'No monster was found'
+          : "Aucun monstre n'a été trouvé"
+      );
   }
 
   private _computeSearchBarPlaceholder() {

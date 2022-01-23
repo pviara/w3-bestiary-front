@@ -23,6 +23,13 @@
     }
   }
 
+  .not-found-monster {
+    margin: 0.5em;
+    
+    padding: 0;
+    color: grey;
+  }
+
   .category {
     display: flex;
     flex-direction: column;
