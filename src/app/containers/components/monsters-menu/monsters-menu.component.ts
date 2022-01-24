@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MonstersByCategory } from 'src/app/models/monster/monster';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
@@ -8,7 +8,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   templateUrl: './monsters-menu.component.html',
   styleUrls: ['./monsters-menu.component.scss']
 })
-export class MonstersMenuComponent implements OnInit {
+export class MonstersMenuComponent implements OnChanges, OnInit {
   filteredMonstersByCategory!: MonstersByCategory[];
   
   @Input()
@@ -26,10 +26,8 @@ export class MonstersMenuComponent implements OnInit {
     private _localStorageService: LocalStorageService,
     private _route: ActivatedRoute
   ) {}
-  
-  ngOnInit() {
-    this.filteredMonstersByCategory = this.monsterCategories;
 
+  ngOnChanges() {
     this
       ._localStorageService
       .langSubject
@@ -54,6 +52,10 @@ export class MonstersMenuComponent implements OnInit {
           }
         }
       );
+  }
+  
+  ngOnInit() {
+    this.filteredMonstersByCategory = this.monsterCategories;
   }
   
   assembleImagePath(monsterCode: string) {
