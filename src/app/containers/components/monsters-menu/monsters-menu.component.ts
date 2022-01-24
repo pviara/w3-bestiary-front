@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MonsterByCategory, MonstersByCategory } from 'src/app/models/monster/monster';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
@@ -8,7 +8,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   templateUrl: './monsters-menu.component.html',
   styleUrls: ['./monsters-menu.component.scss']
 })
-export class MonstersMenuComponent {
+export class MonstersMenuComponent implements OnInit {
   filteredMonstersByCategory!: MonstersByCategory[];
   
   @Input()
@@ -17,6 +17,8 @@ export class MonstersMenuComponent {
   notFoundMonsterMessage = 'No monster was found';
 
   searchPlaceholder = 'Search by name';
+
+  searchText!: string;
   
   selectedCategories: string[] = [];
 
@@ -24,13 +26,61 @@ export class MonstersMenuComponent {
     private _localStorageService: LocalStorageService,
     private _route: ActivatedRoute
   ) {}
-
+  
   ngOnInit() {
     this.filteredMonstersByCategory = this.monsterCategories;
     
-    this.openCurrentMonsterCategory();
-    this._computeNotFoundMonsterMessage();
-    this._computeSearchBarPlaceholder();
+    // // this.openCurrentMonsterCategory();
+
+    this
+      ._localStorageService
+      .langSubject
+      .subscribe(
+        lang => {
+          this.searchText = '';
+          this.filteredMonstersByCategory = this.monsterCategories;
+          this.openCurrentMonsterCategory();
+          
+          switch (lang) {
+            case 'EN': {
+              this.notFoundMonsterMessage = 'No monster was found';
+              this.searchPlaceholder = 'Search by name';
+              break;
+            }
+
+            case 'FR': {
+              this.notFoundMonsterMessage = "Aucun monstre n'a été trouvé";
+              this.searchPlaceholder = 'Rechercher par nom';
+              break;
+            }
+          }
+        }
+      );
+    
+    // // this._computeNotFoundMonsterMessage();
+    // // this._computeSearchBarPlaceholder();
+  }
+
+  private _computeNotFoundMonsterMessage() {
+    this
+      ._localStorageService
+      .langSubject
+      .subscribe(
+        lang => this.notFoundMonsterMessage = lang === 'EN'
+          ? 'No monster was found'
+          : "Aucun monstre n'a été trouvé"
+      );
+  }
+
+  private _computeSearchBarPlaceholder() {
+    this
+      ._localStorageService
+      .langSubject
+      .subscribe(
+        lang => this.searchPlaceholder = lang === 'EN'
+          ? 'Search by name'
+          : 'Rechercher par nom'
+      );
   }
   
   assembleImagePath(monsterCode: string) {
@@ -46,6 +96,8 @@ export class MonstersMenuComponent {
   }
 
   openCurrentMonsterCategory() {
+    this.selectedCategories = [];
+    
     const monsterCode = this
       ._route
       .snapshot
@@ -152,27 +204,5 @@ export class MonstersMenuComponent {
           categoryCode
         );
     }
-  }
-
-  private _computeNotFoundMonsterMessage() {
-    this
-      ._localStorageService
-      .langSubject
-      .subscribe(
-        lang => this.notFoundMonsterMessage = lang === 'EN'
-          ? 'No monster was found'
-          : "Aucun monstre n'a été trouvé"
-      );
-  }
-
-  private _computeSearchBarPlaceholder() {
-    this
-      ._localStorageService
-      .langSubject
-      .subscribe(
-        lang => this.searchPlaceholder = lang === 'EN'
-          ? 'Search by name'
-          : 'Rechercher par nom'
-      );
   }
 }

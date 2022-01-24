@@ -3,6 +3,7 @@
     <input
       type="text"
       [placeholder]="searchPlaceholder + '...'"
+      [(ngModel)]="searchText"
       (input)="search($event)">
   </div>
 
