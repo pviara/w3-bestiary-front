@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MonsterByCategory, MonstersByCategory } from 'src/app/models/monster/monster';
+import { Component, Input, OnInit } from '@angular/core';
+import { MonstersByCategory } from 'src/app/models/monster/monster';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -29,8 +29,6 @@ export class MonstersMenuComponent implements OnInit {
   
   ngOnInit() {
     this.filteredMonstersByCategory = this.monsterCategories;
-    
-    // // this.openCurrentMonsterCategory();
 
     this
       ._localStorageService
@@ -55,31 +53,6 @@ export class MonstersMenuComponent implements OnInit {
             }
           }
         }
-      );
-    
-    // // this._computeNotFoundMonsterMessage();
-    // // this._computeSearchBarPlaceholder();
-  }
-
-  private _computeNotFoundMonsterMessage() {
-    this
-      ._localStorageService
-      .langSubject
-      .subscribe(
-        lang => this.notFoundMonsterMessage = lang === 'EN'
-          ? 'No monster was found'
-          : "Aucun monstre n'a été trouvé"
-      );
-  }
-
-  private _computeSearchBarPlaceholder() {
-    this
-      ._localStorageService
-      .langSubject
-      .subscribe(
-        lang => this.searchPlaceholder = lang === 'EN'
-          ? 'Search by name'
-          : 'Rechercher par nom'
       );
   }
   
