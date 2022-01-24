@@ -1,5 +1,6 @@
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { GetItemNamePipe } from './pipes/get-item-name.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemsService } from './services/items.service';
@@ -31,6 +32,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     HttpClientModule,
     RouterModule
   ],
