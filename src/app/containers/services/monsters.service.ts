@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { of, tap } from 'rxjs';
 import { Monster, MonstersByCategory } from 'src/app/models/monster/monster';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class MonstersService {
@@ -22,7 +23,7 @@ export class MonstersService {
     return this
       ._httpClient
       .get<Monster>(
-        `http://localhost:3000/api/monster/search?code=${code}&lang=${lang}`
+        `${environment.apiURL}/api/monster/search?code=${code}&lang=${lang}`
       ).pipe(
         tap(
           monster => this
