@@ -3,6 +3,39 @@
   
   animation: fadeIn ease 0.5s;
 
+  background-image: url('../assets/coming-soon.png');
+  background-position: center;
+  background-repeat: no-repeat;
+
+  .release-message {
+    user-select: none;
+    
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      margin: 0;
+      margin-bottom: 0.5em;
+
+      font-weight: normal;
+
+      letter-spacing: 0.3ch;
+    }
+
+    .countdown {
+      h1 {
+        font-size: 200%;
+        font-weight: bold;
+
+        letter-spacing: 0.2ch;
+      }
+    }
+  }
+  
   .content {
     height: 100%;
 
