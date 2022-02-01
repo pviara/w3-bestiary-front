@@ -1,17 +1,31 @@
 <div class="container">
-  <div class="content">
-    <div class="header">
-      <div class="lang">
-        <lang-selector></lang-selector>
+  <ng-container *ngIf="hasAppBeenReleased && countdown; else appHasntBeenReleased">
+    <div class="content">
+      <div class="header">
+        <div class="lang">
+          <lang-selector></lang-selector>
+        </div>
+        <div class="logo">
+          <img
+            draggable="false"
+            src='../assets/icons/app/logo_witcher3.png'>
+        </div>
       </div>
-      <div class="logo">
-        <img
-          draggable="false"
-          src='../assets/icons/app/logo_witcher3.png'>
+      <div class="body">
+        <router-outlet></router-outlet>
       </div>
     </div>
-    <div class="body">
-      <router-outlet></router-outlet>
+  </ng-container>
+  <ng-template #appHasntBeenReleased>
+    <div class="release-message">
+      <div class="title">
+        <h2>· THE FIRST BESTIARY APP FOR THE WITCHER 3 ·</h2>
+      </div>
+      <div class="countdown">
+        <h1>
+          {{ countdown }}
+        </h1>
+      </div>
     </div>
-  </div>
+  </ng-template>
 </div>
