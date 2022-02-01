@@ -23,7 +23,7 @@ export class ItemsService {
     return this
       ._httpClient
       .get<Item[]>(
-        `${environment.apiURL}/api/item?lang=${lang}`
+        `${environment.apiURL}/item?lang=${lang}`
       ).pipe(
         tap(
           items => this
