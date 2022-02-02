@@ -6,9 +6,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy, OnInit {
-  hasAppBeenReleased = false;
-
   countdown!: string;
+
+  hasAppBeenReleased!: boolean;
   
   private _timer: any;
 
@@ -17,24 +17,56 @@ export class AppComponent implements OnDestroy, OnInit {
   }
   
   ngOnInit() {
-    const releaseDate = new Date('2022-02-15T22:00:00');
+    let now = new Date();
+
+    const releaseDate = new Date('2022-02-14T20:00:00');
+    const parsedDate = this._computeCountDown(releaseDate, now);
+
+    if (parsedDate.getTime() <= 0) {
+      this.hasAppBeenReleased = true;
+
+    } else {
+      this.hasAppBeenReleased = false;
+
+      this.countdown = this._assembleCountdown(parsedDate);
+
+      this._timer = setInterval((_: any) => {
+        now = new Date();
+
+        const parsedDate = this._computeCountDown(releaseDate, now);
+        if (parsedDate.getTime() <= 0) {
+          this.hasAppBeenReleased = true;
+          clearInterval(this._timer);
+          return;
+        }
+
+        this.countdown = this._assembleCountdown(parsedDate);
+
+      }, 1000);
+      
+    }
+  }
+
+  private _assembleCountdown(parsedDate: Date) {
+    const date = parsedDate.getDate() - 1;
+    const hours = parsedDate.getHours() - 1;
+    const minutes = parsedDate.getMinutes();
+    const seconds = parsedDate.getSeconds();
+
+    const addPluralSuffix = (value: number) => {
+      return value > 1 ? 's' : '';
+    };
     
-    this.countdown = this._computeCountDown(releaseDate, new Date());
-    
-    this._timer = setInterval((_: any) => {
-      this.countdown = this._computeCountDown(releaseDate, new Date());
-    }, 1000);
+    return `
+      ${date} day${addPluralSuffix(date)},
+      ${hours} hour${addPluralSuffix(hours)},
+      ${minutes} minute${addPluralSuffix(minutes)},
+      ${seconds} second${addPluralSuffix(seconds)}
+    `;
   }
 
   private _computeCountDown(releaseDate: Date, now: Date) {
     const difference = releaseDate.getTime() - now.getTime();
-    const parsedDate = new Date(difference);
-
-    return `
-      ${parsedDate.getDate()} days,
-      ${parsedDate.getHours()} hours,
-      ${parsedDate.getMinutes()} minutes,
-      ${parsedDate.getSeconds()} seconds
-    `;
+    return new Date(difference);
   }
 }
