@@ -48,8 +48,8 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   private _assembleCountdown(parsedDate: Date) {
-    const date = parsedDate.getDate() - 1;
-    const hours = parsedDate.getHours() - 1;
+    const date = parsedDate.getDate();
+    const hours = parsedDate.getHours();
     const minutes = parsedDate.getMinutes();
     const seconds = parsedDate.getSeconds();
 
