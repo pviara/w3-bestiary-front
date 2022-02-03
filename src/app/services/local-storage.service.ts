@@ -26,7 +26,8 @@ export class LocalStorageService {
   get lang(): string {
     const langFromStorage = this._getFromStorage('lang');
     if (!langFromStorage) {
-      throw new Error('No language is stored in local storage.');
+      this.lang = 'EN';
+      return this.lang;
     }
 
     return JSON.parse(langFromStorage) as string;
