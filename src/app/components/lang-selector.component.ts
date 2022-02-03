@@ -9,24 +9,16 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class LangSelectorComponent implements OnInit {
   languages = ['EN', 'FR'];
 
-  private _selected = 'EN';
-
+  private _selected!: string;
+  
   constructor(
     private _localStorageService: LocalStorageService
   ) {}
   
   ngOnInit() {
-    try {
-      this._selected = this
-        ._localStorageService
-        .lang;
-
-    } catch (e: unknown) {
-      this
-        ._localStorageService
-        .lang = this._selected;
-      
-    }
+    this._selected = this
+      ._localStorageService
+      .lang;
   }
   
   assembleImagePath(lang: string) {
