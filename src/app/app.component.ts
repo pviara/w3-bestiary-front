@@ -48,8 +48,8 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   private _assembleCountdown(parsedDate: Date) {
-    const date = parsedDate.getDate();
-    const hours = parsedDate.getHours();
+    const date = parsedDate.getDate() - 1;
+    const hours = parsedDate.getHours() - 1;
     const minutes = parsedDate.getMinutes();
     const seconds = parsedDate.getSeconds();
 
@@ -58,9 +58,9 @@ export class AppComponent implements OnDestroy, OnInit {
     };
     
     return `
-      ${date} day${addPluralSuffix(date)},
-      ${hours} hour${addPluralSuffix(hours)},
-      ${minutes} minute${addPluralSuffix(minutes)},
+      ${date >= 0 ? date : 0} day${addPluralSuffix(date)}, 
+      ${hours >= 0 ? hours : 0} hour${addPluralSuffix(hours)}, 
+      ${minutes} minute${addPluralSuffix(minutes)}, 
       ${seconds} second${addPluralSuffix(seconds)}
     `;
   }
