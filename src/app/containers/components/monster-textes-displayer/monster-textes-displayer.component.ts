@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import { MonsterTextes } from 'src/app/models/monster/monster';
 
 @Component({
@@ -57,7 +57,6 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
     const end = focusOffset > anchorOffset
       ? focusOffset
       : anchorOffset;
-
     const characters = Array.from(focusNode.nodeValue);
     const selected = characters
       .splice(
