@@ -3,10 +3,17 @@
     <h1>{{ textes.name | uppercase }}</h1>
   </div>
   <div class="content">
-    <ng-container *ngIf="textes.quote">
+    <ng-container *ngIf="textes.quote?.text">
       <div class="quote">
-        <p [innerHtml]="textes.quote.text"></p>
-        <p class="author">
+        <p
+          #quoteText
+          [innerHtml]="textes.quote.text"
+          (click)="handleSelection($event)">
+        </p>
+        <p
+          #author
+          class="author"
+          (click)="handleSelection($event)">
           —
           <ng-container *ngIf="textes.quote.author.firstname as firstname">
             {{ firstname | capitalize }}<ng-container *ngIf="!textes.quote.author.lastname">,</ng-container>
@@ -19,7 +26,11 @@
       </div>
     </ng-container>
     <div class="description">
-      <p [innerHtml]="textes.description"></p>
+      <p
+        #description
+        [innerHtml]="textes.description"
+        (click)="handleSelection($event)">
+      </p>
     </div>
   </div>
 </div>

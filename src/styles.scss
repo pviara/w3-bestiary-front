@@ -55,3 +55,11 @@ h1 {
 ::-webkit-scrollbar-thumb:hover {
   background: #0e0e0e;
 }
+
+::-moz-selection {
+  background-color: #79624d;
+}
+
+::selection {
+  background-color: #79624d;
+}
