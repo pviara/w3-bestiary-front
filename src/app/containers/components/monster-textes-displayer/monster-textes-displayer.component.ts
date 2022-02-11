@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
 import { MonsterTextes } from 'src/app/models/monster/monster';
 
 @Component({
@@ -9,4 +9,53 @@ import { MonsterTextes } from 'src/app/models/monster/monster';
 export class MonsterTextesDisplayerComponent {
   @Input()
   textes!: MonsterTextes;
+
+  @ViewChild('author')
+  private _author!: ElementRef
+
+  @ViewChild('description')
+  private _description!: ElementRef
+
+  @ViewChild('quoteText')
+  private _quoteText!: ElementRef
+
+  ngAfterViewInit() {
+    console.log(this._author.nativeElement.innerText);
+    console.log(this._description.nativeElement.innerText);
+    console.log(this._quoteText.nativeElement.innerText);
+  }
+  
+  handleSelection({ view }: MouseEvent) {
+    const selection = view?.getSelection();
+    if (!selection || selection?.type !== 'Range') {
+      return;
+    }
+    
+    const { 
+      anchorOffset,
+      focusOffset,
+      focusNode
+    } = selection;
+    if (!focusNode || !focusNode.nodeValue) {
+      return;
+    }
+
+    const start = anchorOffset > focusOffset
+      ? focusOffset
+      : anchorOffset;
+    
+    const end = focusOffset > anchorOffset
+      ? focusOffset
+      : anchorOffset;
+    
+    const characters = Array.from(focusNode.nodeValue);
+    const selected = characters
+      .splice(
+        start,
+        end - start
+      )
+      .join('');
+
+    console.log(selected);
+  }
 }
