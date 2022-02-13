@@ -2,29 +2,44 @@ import { Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/c
 import { MonsterTextes } from 'src/app/models/monster/monster';
 
 @Component({
+  inputs: ['mousePosition'],
   selector: 'monster-textes-displayer',
   templateUrl: './monster-textes-displayer.component.html',
   styleUrls: ['./monster-textes-displayer.component.scss']
 })
 export class MonsterTextesDisplayerComponent {
   isTypoTooltipDisplayed = false;
+
+  mousePosition!: { x: number; y: number; };
   
   @Input()
   textes!: MonsterTextes;
 
   @ViewChild('author')
-  private _author!: ElementRef
+  private _author!: ElementRef;
 
   @ViewChild('description')
-  private _description!: ElementRef
+  private _description!: ElementRef;
 
   @ViewChild('quoteText')
-  private _quoteText!: ElementRef
-
+  private _quoteText!: ElementRef;
+  
   ngAfterViewInit() {
     console.log(this._author.nativeElement.innerText);
     console.log(this._description.nativeElement.innerText);
     console.log(this._quoteText.nativeElement.innerText);
+
+    document
+      .body
+      .addEventListener(
+        'mousemove', 
+        (mouseEvent: MouseEvent) => {
+          this.mousePosition = {
+            x: mouseEvent.clientX,
+            y: mouseEvent.clientY
+          };
+        }
+      );
   }
   
   handleSelection({ view }: MouseEvent) {
@@ -62,6 +77,9 @@ export class MonsterTextesDisplayerComponent {
         end - start
       )
       .join('');
+    if (!selected.trim()) {
+      return;
+    }
 
     // multi-paragraph selection
     if (
@@ -74,6 +92,6 @@ export class MonsterTextesDisplayerComponent {
 
     this.isTypoTooltipDisplayed = true;
 
-    console.log(selected);
+    console.log(selected, this.mousePosition);
   }
 }

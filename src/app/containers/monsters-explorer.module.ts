@@ -14,7 +14,6 @@ import { MonsterViewerComponent } from './components/monster-viewer/monster-view
 import { MonsterWeakspotsDisplayerComponent } from './components/monster-weakspots-displayer/monster-weakspots-displayer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MousePositionDirective } from './directives/mouse-position.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { MousePositionDirective } from './directives/mouse-position.directive';
     MonsterTextesDisplayerComponent,
     MonsterViewerComponent,
     MonsterWeakspotsDisplayerComponent,
-    MousePositionDirective
   ],
   exports: [
     MonstersExplorerComponent,
@@ -42,7 +40,7 @@ import { MousePositionDirective } from './directives/mouse-position.directive';
     ItemsResolver,
     ItemsService,
     MonsterGuard,
-    MonstersService
+    MonstersService,
   ]
 })
 export class MonstersExplorerModule { }
