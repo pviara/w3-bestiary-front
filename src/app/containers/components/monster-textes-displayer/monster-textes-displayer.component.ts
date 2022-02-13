@@ -7,6 +7,8 @@ import { MonsterTextes } from 'src/app/models/monster/monster';
   styleUrls: ['./monster-textes-displayer.component.scss']
 })
 export class MonsterTextesDisplayerComponent {
+  isTypoTooltipDisplayed = false;
+  
   @Input()
   textes!: MonsterTextes;
 
@@ -26,12 +28,15 @@ export class MonsterTextesDisplayerComponent {
   }
   
   handleSelection({ view }: MouseEvent) {
+    this.isTypoTooltipDisplayed = false;
+
     const selection = view?.getSelection();
     if (!selection || selection?.type !== 'Range') {
       return;
     }
     
     const { 
+      anchorNode,
       anchorOffset,
       focusOffset,
       focusNode
@@ -47,6 +52,8 @@ export class MonsterTextesDisplayerComponent {
     const end = focusOffset > anchorOffset
       ? focusOffset
       : anchorOffset;
+
+    console.log(selection);
     
     const characters = Array.from(focusNode.nodeValue);
     const selected = characters
@@ -55,6 +62,17 @@ export class MonsterTextesDisplayerComponent {
         end - start
       )
       .join('');
+
+    // multi-paragraph selection
+    if (
+      !anchorNode
+      ?.textContent
+      ?.includes(selected)
+    ) {
+      return;
+    }
+
+    this.isTypoTooltipDisplayed = true;
 
     console.log(selected);
   }
