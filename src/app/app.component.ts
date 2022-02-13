@@ -19,7 +19,7 @@ export class AppComponent implements OnDestroy, OnInit {
   ngOnInit() {
     let now = new Date();
 
-    const releaseDate = new Date('2022-02-14T20:00:00');
+    const releaseDate = new Date('2022-03-01T20:00:00');
     const parsedDate = this._computeCountDown(releaseDate, now);
 
     if (parsedDate.getTime() <= 0) {
