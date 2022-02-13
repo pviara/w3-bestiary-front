@@ -1,11 +1,23 @@
-import { Directive, HostListener } from "@angular/core";
+import { Directive, EventEmitter, HostListener, Output } from "@angular/core";
+
+class MousePosition {
+    constructor(
+        readonly x: number,
+        readonly y: number
+    ) {}
+}
 
 @Directive({
     selector: '[mousePosition]'
 })
 export class MousePositionDirective {
+    @Output()
+    changeMousePosition: EventEmitter<MousePosition> = new EventEmitter();
+
     @HostListener('mousemove', ['$event'])
     onMouseMove(event: MouseEvent) {
-        console.log(event.clientX, event.clientY);
+        this.changeMousePosition.emit(
+            new MousePosition(event.clientX, event.clientY)
+        );
     }
 }
