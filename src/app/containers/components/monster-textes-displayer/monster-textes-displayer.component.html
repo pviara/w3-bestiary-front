@@ -1,4 +1,4 @@
-<div class="container">
+<div mousePosition class="container">
   <div class="title">
     <h1>{{ textes.name | uppercase }}</h1>
   </div>
@@ -33,4 +33,9 @@
       </p>
     </div>
   </div>
+  <ng-container *ngIf="isTypoTooltipDisplayed">
+    <div #typoTooltip>
+      <p>HEY MEN</p>
+    </div>
+  </ng-container>
 </div>
