@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { LangSelectorComponent } from './components/lang-selector.component';
-import { MonstersExplorerModule } from './containers/monsters-explorer.module';
 import { LocalStorageService } from './services/local-storage.service';
+import { MonstersExplorerModule } from './containers/monsters-explorer.module';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
