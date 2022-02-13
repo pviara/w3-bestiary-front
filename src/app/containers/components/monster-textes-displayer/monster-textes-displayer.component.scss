@@ -53,4 +53,22 @@
       }
     }
   }
+
+  .typo-tooltip {
+    position: absolute;
+    top: -4000px;
+
+    p {
+      margin: 0;
+      padding: 1em;
+
+      background-color: darkblue;
+      border-radius: 5px;
+
+      user-select: none;
+
+      box-shadow: 0px 0px 15px #000;
+    }
+
+  }
 }
