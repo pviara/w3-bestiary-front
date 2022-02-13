@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { MonsterTextes } from 'src/app/models/monster/monster';
 
 @Component({
@@ -7,28 +7,18 @@ import { MonsterTextes } from 'src/app/models/monster/monster';
   templateUrl: './monster-textes-displayer.component.html',
   styleUrls: ['./monster-textes-displayer.component.scss']
 })
-export class MonsterTextesDisplayerComponent {
-  isTypoTooltipDisplayed = false;
-
+export class MonsterTextesDisplayerComponent implements AfterViewInit {
   mousePosition!: { x: number; y: number; };
   
   @Input()
   textes!: MonsterTextes;
 
-  @ViewChild('author')
-  private _author!: ElementRef;
-
-  @ViewChild('description')
-  private _description!: ElementRef;
-
-  @ViewChild('quoteText')
-  private _quoteText!: ElementRef;
+  @ViewChild('typoTooltip')
+  private typoTooltip!: ElementRef;
+  
+  constructor(private renderer: Renderer2) {}
   
   ngAfterViewInit() {
-    console.log(this._author.nativeElement.innerText);
-    console.log(this._description.nativeElement.innerText);
-    console.log(this._quoteText.nativeElement.innerText);
-
     document
       .body
       .addEventListener(
@@ -43,8 +33,8 @@ export class MonsterTextesDisplayerComponent {
   }
   
   handleSelection({ view }: MouseEvent) {
-    this.isTypoTooltipDisplayed = false;
-
+    this.setTooltipPosition(-4000, -4000);
+    
     const selection = view?.getSelection();
     if (!selection || selection?.type !== 'Range') {
       return;
@@ -68,8 +58,6 @@ export class MonsterTextesDisplayerComponent {
       ? focusOffset
       : anchorOffset;
 
-    console.log(selection);
-    
     const characters = Array.from(focusNode.nodeValue);
     const selected = characters
       .splice(
@@ -90,8 +78,24 @@ export class MonsterTextesDisplayerComponent {
       return;
     }
 
-    this.isTypoTooltipDisplayed = true;
+    this.setTooltipPosition(this.mousePosition.x, this.mousePosition.y - 60);
+  }
 
-    console.log(selected, this.mousePosition);
+  private setTooltipPosition(x: number, y: number) {
+    this
+      .renderer
+      .setStyle(
+        this.typoTooltip.nativeElement, 
+        'left',
+        `${x}px`
+      );
+
+    this
+      .renderer
+      .setStyle(
+        this.typoTooltip.nativeElement, 
+        'top',
+        `${y}px`
+      );
   }
 }
