@@ -3,28 +3,27 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy, OnInit {
   countdown!: string;
 
   hasAppBeenReleased!: boolean;
-  
+
   private _timer: any;
 
   ngOnDestroy() {
     clearInterval(this._timer);
   }
-  
+
   ngOnInit() {
     let now = new Date();
 
-    const releaseDate = new Date('2022-02-02T20:00:00');
+    const releaseDate = new Date('2022-03-01T20:00:00');
     const parsedDate = this._computeCountDown(releaseDate, now);
 
     if (parsedDate.getTime() <= 0) {
       this.hasAppBeenReleased = true;
-
     } else {
       this.hasAppBeenReleased = false;
 
@@ -41,9 +40,7 @@ export class AppComponent implements OnDestroy, OnInit {
         }
 
         this.countdown = this._assembleCountdown(parsedDate);
-
       }, 1000);
-      
     }
   }
 
@@ -56,7 +53,7 @@ export class AppComponent implements OnDestroy, OnInit {
     const addPluralSuffix = (value: number) => {
       return value > 1 ? 's' : '';
     };
-    
+
     return `
       ${date >= 0 ? date : 0} day${addPluralSuffix(date)}, 
       ${hours >= 0 ? hours : 0} hour${addPluralSuffix(hours)}, 
