@@ -13,7 +13,7 @@ import { TyposService } from '../../services/typos.service';
 export class MonsterViewerComponent {
   monster!: Monster;
 
-  reportedTextTypo!: string;
+  hasIssueBeenCreated = false;
 
   constructor(
     private _route: ActivatedRoute,
@@ -32,6 +32,8 @@ export class MonsterViewerComponent {
   }
 
   onReportTextTypo(typo: string) {
+    this.hasIssueBeenCreated = false;
+    
     this
       ._typosService
       .reportTextTypo(
@@ -40,7 +42,7 @@ export class MonsterViewerComponent {
       )
       .subscribe(
         typo => {
-          this.reportedTextTypo = typo.githubIssueURL;
+          this.hasIssueBeenCreated = !!typo;
         }
       );
   }
