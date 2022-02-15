@@ -13,7 +13,8 @@
   </div>
   <div *ngIf="monster.textes" class="textes">
     <monster-textes-displayer
-      [textes]="monster.textes">
+      [textes]="monster.textes"
+      (reportTextTypo)="onReportTextTypo($event)">
     </monster-textes-displayer>
   </div>
 </div>

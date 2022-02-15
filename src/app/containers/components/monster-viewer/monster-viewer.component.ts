@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Monster } from 'src/app/models/monster/monster';
 import { MonstersService } from '../../services/monsters.service';
+import { TyposService } from '../../services/typos.service';
 
 @Component({
   selector: 'monster-viewer',
@@ -12,10 +13,13 @@ import { MonstersService } from '../../services/monsters.service';
 export class MonsterViewerComponent {
   monster!: Monster;
 
+  reportedTextTypo!: string;
+
   constructor(
     private _route: ActivatedRoute,
     private _localStorageService: LocalStorageService,
-    private _monstersService: MonstersService
+    private _monstersService: MonstersService,
+    private _typosService: TyposService,
   ) { }
 
   ngOnInit() {
@@ -25,6 +29,20 @@ export class MonsterViewerComponent {
 
   assembleImagePath(code: string) {
     return `../../../../assets/bestiary/images/${code}.png`;
+  }
+
+  onReportTextTypo(typo: string) {
+    this
+      ._typosService
+      .reportTextTypo(
+        this.monster.code,
+        typo
+      )
+      .subscribe(
+        typo => {
+          this.reportedTextTypo = typo.githubIssueURL;
+        }
+      );
   }
 
   private loadMonsterWhenChangedCodeParam() {

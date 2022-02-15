@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { MonsterTextes } from 'src/app/models/monster/monster';
 
 @Component({
@@ -10,11 +10,16 @@ import { MonsterTextes } from 'src/app/models/monster/monster';
 export class MonsterTextesDisplayerComponent implements AfterViewInit {
   mousePosition!: { x: number; y: number; };
   
+  @Output()
+  reportTextTypo = new EventEmitter<string>();
+  
   @Input()
   textes!: MonsterTextes;
 
+  private _selectedTypo!: string;
+  
   @ViewChild('typoTooltip')
-  private typoTooltip!: ElementRef;
+  private _typoTooltip!: ElementRef;
   
   constructor(private renderer: Renderer2) {}
   
@@ -78,13 +83,23 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
     }
 
     this.setTooltipPosition(this.mousePosition.x, this.mousePosition.y - 60);
+
+    this._selectedTypo = selected;
+  }
+
+  onReportTextTypo() {
+    if (!this._selectedTypo) {
+      return;
+    }
+
+    this.reportTextTypo.emit(this._selectedTypo);
   }
 
   private setTooltipPosition(x: number, y: number) {
     this
       .renderer
       .setStyle(
-        this.typoTooltip.nativeElement, 
+        this._typoTooltip.nativeElement, 
         'left',
         `${x}px`
       );
@@ -92,7 +107,7 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
     this
       .renderer
       .setStyle(
-        this.typoTooltip.nativeElement, 
+        this._typoTooltip.nativeElement, 
         'top',
         `${y}px`
       );
