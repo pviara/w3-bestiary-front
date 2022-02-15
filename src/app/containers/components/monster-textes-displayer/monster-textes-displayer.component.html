@@ -33,11 +33,15 @@
       </p>
     </div>
   </div>
-  <div
-    #typoTooltip
-    class="typo-tooltip">
-    <p>
-      <a (click)="onReportTextTypo()">Report a typo</a>
-    </p>
-  </div>
+  <ng-container *ngIf="!hasIssueBeenCreated">
+    <div
+      #typoTooltip
+      class="typo-tooltip">
+      <p>
+        <a (click)="onReportTextTypo()">
+          🚨
+        </a>
+      </p>
+    </div>
+  </ng-container>
 </div>

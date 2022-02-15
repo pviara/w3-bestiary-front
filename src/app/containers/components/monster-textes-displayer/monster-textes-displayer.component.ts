@@ -8,6 +8,9 @@ import { MonsterTextes } from 'src/app/models/monster/monster';
   styleUrls: ['./monster-textes-displayer.component.scss']
 })
 export class MonsterTextesDisplayerComponent implements AfterViewInit {
+  @Input()
+  hasIssueBeenCreated!: boolean;
+  
   mousePosition!: { x: number; y: number; };
   
   @Output()
@@ -21,7 +24,7 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
   @ViewChild('typoTooltip')
   private _typoTooltip!: ElementRef;
   
-  constructor(private renderer: Renderer2) {}
+  constructor(private _renderer: Renderer2) {}
   
   ngAfterViewInit() {
     document
@@ -38,7 +41,8 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
   }
   
   handleSelection({ view }: MouseEvent) {
-    this.setTooltipPosition(-4000, -4000);
+    this.hasIssueBeenCreated = false;
+    this._setTooltipPosition(-4000, -4000);
     
     const selection = view?.getSelection();
     if (!selection || selection?.type !== 'Range') {
@@ -82,7 +86,7 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
       return;
     }
 
-    this.setTooltipPosition(this.mousePosition.x, this.mousePosition.y - 60);
+    this._setTooltipPosition(this.mousePosition.x, this.mousePosition.y - 60);
 
     this._selectedTypo = selected;
   }
@@ -95,9 +99,9 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
     this.reportTextTypo.emit(this._selectedTypo);
   }
 
-  private setTooltipPosition(x: number, y: number) {
+  private _setTooltipPosition(x: number, y: number) {
     this
-      .renderer
+      ._renderer
       .setStyle(
         this._typoTooltip.nativeElement, 
         'left',
@@ -105,7 +109,7 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
       );
 
     this
-      .renderer
+      ._renderer
       .setStyle(
         this._typoTooltip.nativeElement, 
         'top',
