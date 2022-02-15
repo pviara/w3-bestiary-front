@@ -14,6 +14,7 @@ import { MonsterViewerComponent } from './components/monster-viewer/monster-view
 import { MonsterWeakspotsDisplayerComponent } from './components/monster-weakspots-displayer/monster-weakspots-displayer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TyposService } from './services/typos.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { RouterModule } from '@angular/router';
     ItemsService,
     MonsterGuard,
     MonstersService,
+    TyposService,
   ]
 })
 export class MonstersExplorerModule { }
