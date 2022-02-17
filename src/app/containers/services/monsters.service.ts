@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { of, tap } from 'rxjs';
 import { ReportTextTypoPayload } from 'src/app/models/monster/DTO/report-text-typo.payload';
 import { Monster, MonstersByCategory } from 'src/app/models/monster/monster';
+import { Typo } from 'src/app/models/typo/typo';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { environment } from 'src/environments/environment';
 
@@ -59,16 +60,12 @@ export class MonstersService {
   reportTextTypo(monsterCode: string, typo: string) {
     const { lang } = this._localStorageService;
 
-    const payload = new ReportTextTypoPayload(
-      monsterCode,
-      typo
-    );
+    const payload = new ReportTextTypoPayload(lang, monsterCode, typo);
 
     return this
       ._httpClient
-      .post<void>(
-        `${environment.apiURL}/monster/report?lang=${lang}`,
-        payload
+      .post<Typo>(
+        `${environment.apiURL}/monster/typo`, payload
       );
   }
 
