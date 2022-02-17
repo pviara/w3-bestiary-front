@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Monster } from 'src/app/models/monster/monster';
 import { MonstersService } from '../../services/monsters.service';
-import { TyposService } from '../../services/typos.service';
 
 @Component({
   selector: 'monster-viewer',
@@ -19,7 +18,6 @@ export class MonsterViewerComponent {
     private _route: ActivatedRoute,
     private _localStorageService: LocalStorageService,
     private _monstersService: MonstersService,
-    private _typosService: TyposService,
   ) { }
 
   ngOnInit() {
@@ -35,7 +33,7 @@ export class MonsterViewerComponent {
     this.hasIssueBeenCreated = false;
     
     this
-      ._typosService
+      ._monstersService
       .reportTextTypo(
         this.monster.code,
         typo
