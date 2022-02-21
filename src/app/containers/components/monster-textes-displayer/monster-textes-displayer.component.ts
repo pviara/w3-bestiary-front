@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { MonsterTextes } from 'src/app/models/monster/monster';
+import { Typo } from 'src/app/models/typo/typo';
 
 @Component({
   inputs: ['mousePosition'],
@@ -12,6 +13,9 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
   hasIssueBeenCreated!: boolean;
   
   mousePosition!: { x: number; y: number; };
+  
+  @Input()
+  reportedTypo!: Typo | null;
   
   @Output()
   reportTextTypo = new EventEmitter<string>();
@@ -41,6 +45,7 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
   }
   
   handleSelection({ view }: MouseEvent) {
+    this.reportedTypo = null;
     this.hasIssueBeenCreated = false;
     this._setTooltipPosition(-4000, -4000);
     
@@ -100,10 +105,11 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
   }
 
   private _setTooltipPosition(x: number, y: number) {
-    this
+    try {
+      this
       ._renderer
       .setStyle(
-        this._typoTooltip.nativeElement, 
+        this._typoTooltip?.nativeElement, 
         'left',
         `${x}px`
       );
@@ -111,9 +117,10 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
     this
       ._renderer
       .setStyle(
-        this._typoTooltip.nativeElement, 
+        this._typoTooltip?.nativeElement, 
         'top',
         `${y}px`
       );
+    } catch (e: unknown) {}
   }
 }

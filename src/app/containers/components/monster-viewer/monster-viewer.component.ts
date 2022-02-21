@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Monster } from 'src/app/models/monster/monster';
 import { MonstersService } from '../../services/monsters.service';
+import { Typo } from 'src/app/models/typo/typo';
 
 @Component({
   selector: 'monster-viewer',
@@ -13,6 +14,8 @@ export class MonsterViewerComponent {
   monster!: Monster;
 
   hasIssueBeenCreated = false;
+
+  reportedTypo: Typo | null = null;
 
   constructor(
     private _route: ActivatedRoute,
@@ -40,7 +43,11 @@ export class MonsterViewerComponent {
       )
       .subscribe(
         typo => {
-          this.hasIssueBeenCreated = !!typo;
+          this.reportedTypo = typo;
+
+          setTimeout(() => {
+            this.hasIssueBeenCreated = !!typo;
+          }, 3000);
         }
       );
   }
