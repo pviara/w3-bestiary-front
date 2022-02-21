@@ -1,11 +1,11 @@
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Monster, MonstersByCategory } from 'src/app/models/monster/monster';
 import { of, tap } from 'rxjs';
 import { ReportTextTypoPayload } from 'src/app/models/monster/DTO/report-text-typo.payload';
-import { Monster, MonstersByCategory } from 'src/app/models/monster/monster';
 import { Typo } from 'src/app/models/typo/typo';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class MonstersService {
