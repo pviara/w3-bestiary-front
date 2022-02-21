@@ -37,10 +37,15 @@
     <div
       #typoTooltip
       class="typo-tooltip">
-      <p>
-        <a (click)="onReportTextTypo()">
-          🚨
-        </a>
+      <p [ngClass]="!!reportedTypo ? 'no-cursor' : ''">
+        <ng-container *ngIf="!reportedTypo; else typoHasBeenReported">
+          <a (click)="onReportTextTypo()">
+            🚨
+          </a>
+        </ng-container>
+        <ng-template #typoHasBeenReported>
+          ✅
+        </ng-template>
       </p>
     </div>
   </ng-container>
