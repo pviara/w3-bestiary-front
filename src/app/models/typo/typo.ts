@@ -1,5 +1,9 @@
 export class Typo {
     constructor(
-        readonly githubIssueURL: string
+        readonly _id: string,
+        readonly lang: string,
+        readonly monsterCode: string,
+        readonly content: string,
+        readonly isError?: boolean,
     ) {}
 }

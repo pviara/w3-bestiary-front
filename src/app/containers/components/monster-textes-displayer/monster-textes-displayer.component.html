@@ -44,7 +44,12 @@
           </a>
         </ng-container>
         <ng-template #typoHasBeenReported>
-          ✅
+          <ng-container *ngIf="!reportedTypo?.isError; else unreportedTypo">
+            ✅
+          </ng-container>
+          <ng-template #unreportedTypo>
+            ❌
+          </ng-template>
         </ng-template>
       </p>
     </div>
