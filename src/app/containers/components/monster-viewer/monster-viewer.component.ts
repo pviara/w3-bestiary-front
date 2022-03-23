@@ -42,12 +42,29 @@ export class MonsterViewerComponent {
         typo
       )
       .subscribe(
-        typo => {
-          this.reportedTypo = typo;
-
-          setTimeout(() => {
-            this.hasIssueBeenCreated = !!typo;
-          }, 3000);
+        {
+          next: (typo) => {
+            this.reportedTypo = typo;
+    
+            setTimeout(() => {
+              this.hasIssueBeenCreated = !!typo;
+            }, 3000);
+          },
+          error: (err) => {
+            if (err.status === 409) {
+              this.reportedTypo = {
+                _id: '',
+                lang: '',
+                monsterCode: '',
+                content: '',
+                isError: true,
+              };
+    
+              setTimeout(() => {
+                this.hasIssueBeenCreated = !!typo;
+              }, 3000);
+            }
+          }
         }
       );
   }
