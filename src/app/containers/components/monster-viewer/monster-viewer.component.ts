@@ -1,5 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
+import { Item } from 'src/app/models/item/item';
+import { ItemsService } from '../../services/items.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Monster } from 'src/app/models/monster/monster';
 import { MonstersService } from '../../services/monsters.service';
@@ -15,16 +17,20 @@ export class MonsterViewerComponent {
 
   hasIssueBeenCreated = false;
 
+  items!: Item[];
+
   reportedTypo: Typo | null = null;
 
   constructor(
     private _route: ActivatedRoute,
+    private _itemsService: ItemsService,
     private _localStorageService: LocalStorageService,
     private _monstersService: MonstersService,
   ) { }
 
   ngOnInit() {
     this.loadMonsterWhenChangedCodeParam();
+    this.reloadItemsWhenLangChanged();
     this.reloadMonsterWhenLangChanged();
   }
 
@@ -82,6 +88,20 @@ export class MonsterViewerComponent {
                 monster => this.monster = monster
               );
           }
+        }
+      );
+  }
+
+  private reloadItemsWhenLangChanged() {
+    this._localStorageService
+      .langSubject
+      .subscribe(
+        _ => {
+          this._itemsService
+            .getItems()
+            .subscribe(
+              items => this.items = items
+            )
         }
       );
   }

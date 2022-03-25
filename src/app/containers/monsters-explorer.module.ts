@@ -14,6 +14,7 @@ import { MonsterViewerComponent } from './components/monster-viewer/monster-view
 import { MonsterWeakspotsDisplayerComponent } from './components/monster-weakspots-displayer/monster-weakspots-displayer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { WeakspotTooltipDirective } from './directives/weakspot-tooltip.directive';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RouterModule } from '@angular/router';
     MonsterTextesDisplayerComponent,
     MonsterViewerComponent,
     MonsterWeakspotsDisplayerComponent,
+    WeakspotTooltipDirective
   ],
   exports: [
     MonstersExplorerComponent,
