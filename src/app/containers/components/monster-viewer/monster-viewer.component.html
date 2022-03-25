@@ -7,6 +7,7 @@
     </div>
     <div *ngIf="monster.weakspots" class="weakspots">
       <monster-weakspots-displayer
+        [items]="items"
         [weakspots]="monster.weakspots">
       </monster-weakspots-displayer>
     </div>
