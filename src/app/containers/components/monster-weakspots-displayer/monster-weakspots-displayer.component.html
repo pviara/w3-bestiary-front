@@ -2,10 +2,12 @@
     <div class="items">
         <div
             class="item"
-            *ngFor="let item of items">
-            <img
-              draggable="false"
-              [src]="assembleImagePath(item)">
+            *ngFor="let weakspot of hoverableWeakspots">
+            <div weakspotTooltip [name]="weakspot | get_item_name:items">
+                <img
+                  draggable="false"
+                  [src]="assembleImagePath(weakspot)">
+            </div>
         </div>
     </div>
 </div>

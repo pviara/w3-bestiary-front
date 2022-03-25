@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { Item } from 'src/app/models/item/item';
 import { MonsterWeakspots } from 'src/app/models/monster/monster';
 
 @Component({
@@ -7,13 +8,16 @@ import { MonsterWeakspots } from 'src/app/models/monster/monster';
     styleUrls: ['./monster-weakspots-displayer.component.scss']
 })
 export class MonsterWeakspotsDisplayerComponent implements OnChanges {
-    items!: string[];
+    hoverableWeakspots!: string[];
+    
+    @Input()
+    items!: Item[];
     
     @Input()
     weakspots!: MonsterWeakspots;
 
     ngOnChanges() {
-        this.items = Object.values(this.weakspots)
+        this.hoverableWeakspots = Object.values(this.weakspots)
             .reduce(
                 (prev, next) => prev.concat(next),
                 []
