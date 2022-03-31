@@ -63,3 +63,19 @@ h1 {
 ::selection {
   background-color: #79624d;
 }
+
+.tooltip {
+  animation: fadeIn ease 0.2s;
+
+  text-align: center;
+  position: absolute;
+
+  padding: 0.6em;
+
+  border: 3px double #2b2219;
+
+  background-color: #000;
+
+  color: #ecdfcd;
+  font-size: 120%;
+}
