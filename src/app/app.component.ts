@@ -1,69 +1,33 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnDestroy, OnInit {
-  countdown!: string;
-
-  hasAppBeenReleased!: boolean;
-
-  private _timer: any;
-
-  ngOnDestroy() {
-    clearInterval(this._timer);
-  }
-
+export class AppComponent implements OnInit {
   ngOnInit() {
-    let now = new Date();
+    console.log(`
+       _    _      _ _       _
+      | |  | |    | | |     | |
+      | |__| | ___| | | ___ | |
+      |  __  |/ _ \\ | |/ _ \\| |
+      | |  | |  __/ | | (_) |_|
+      |_|  |_|\\___|_|_|\\___/(_)
 
-    const releaseDate = new Date('2022-03-01T20:00:00');
-    const parsedDate = this._computeCountDown(releaseDate, now);
+      Thank you for visiting this website.
 
-    if (parsedDate.getTime() <= 0) {
-      this.hasAppBeenReleased = true;
-    } else {
-      this.hasAppBeenReleased = false;
+      You may wonder why I've developed such a website. Well I was watching The Witcher on Netflix and I surprised myself pausing it several times, googling the monsters I would see on the screen. And I was like : "isn't there any website that references all of these monsters ? In both french and english ? And without any annoying ad?" And I just couldn't it! So I decided to build one from scratch.
 
-      this.countdown = this._assembleCountdown(parsedDate);
+      Repositories are open-source and available here :
+      · https://github.com/fairyfingers/w3-bestiary-back
+      · https://github.com/fairyfingers/w3-bestiary-front
 
-      this._timer = setInterval((_: any) => {
-        now = new Date();
+      API is completely free of use and some documentation is available at https://w3.bestiary.app/apiDocs
 
-        const parsedDate = this._computeCountDown(releaseDate, now);
-        if (parsedDate.getTime() <= 0) {
-          this.hasAppBeenReleased = true;
-          clearInterval(this._timer);
-          return;
-        }
 
-        this.countdown = this._assembleCountdown(parsedDate);
-      }, 1000);
-    }
-  }
-
-  private _assembleCountdown(parsedDate: Date) {
-    const date = parsedDate.getDate() - 1;
-    const hours = parsedDate.getHours() - 1;
-    const minutes = parsedDate.getMinutes();
-    const seconds = parsedDate.getSeconds();
-
-    const addPluralSuffix = (value: number) => {
-      return value > 1 ? 's' : '';
-    };
-
-    return `
-      ${date >= 0 ? date : 0} day${addPluralSuffix(date)}, 
-      ${hours >= 0 ? hours : 0} hour${addPluralSuffix(hours)}, 
-      ${minutes} minute${addPluralSuffix(minutes)}, 
-      ${seconds} second${addPluralSuffix(seconds)}
-    `;
-  }
-
-  private _computeCountDown(releaseDate: Date, now: Date) {
-    const difference = releaseDate.getTime() - now.getTime();
-    return new Date(difference);
+      With this,
+      Enjoy your day
+    `);
   }
 }
