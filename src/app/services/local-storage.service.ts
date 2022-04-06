@@ -1,3 +1,4 @@
+import { AppRefreshState } from '../models/app/app-refresh-state';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Item, ItemsByLang } from '../models/item/item';
@@ -13,7 +14,7 @@ export class LocalStorageService {
   langSubject = new BehaviorSubject(
     this._getExistingOrDefaultLanguage()
   );
-
+  
   get itemsByLang(): ItemsByLang[] {
     const itemsByLang = this._getFromStorage('itemsByLang');
     if (!itemsByLang) {
@@ -49,6 +50,15 @@ export class LocalStorageService {
     }
 
     return JSON.parse(monstersByLangFromStorage) as MonstersByLang[];
+  }
+
+  get version(): string {
+    const version = this._getFromStorage('version');
+    if (!version) {
+      throw new Error('No version is stored in local storage.');
+    }
+
+    return JSON.parse(version) as string;
   }
 
   set itemsByLang(value: ItemsByLang[]) {
@@ -94,6 +104,18 @@ export class LocalStorageService {
       return;
     }
     const key = 'monstersByLang';
+
+    if (this._getFromStorage(key)) {
+      localStorage.removeItem(key);
+    }
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  set version(value: string) {
+    if (!value) {
+      return;
+    }
+    const key = 'version';
 
     if (this._getFromStorage(key)) {
       localStorage.removeItem(key);
