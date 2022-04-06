@@ -4,11 +4,13 @@ import { MonstersExplorerComponent } from './containers/monsters-explorer.compon
 import { MonsterViewerComponent } from './containers/components/monster-viewer/monster-viewer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { VersionResolver } from './containers/resolvers/version.resolver';
 
 const routes: Routes = [{
   component: MonstersExplorerComponent,
   path: '',
   resolve: {
+    version: VersionResolver,
     items: ItemsResolver
   },
   children: [{
