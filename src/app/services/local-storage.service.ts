@@ -121,6 +121,8 @@ export class LocalStorageService {
       localStorage.removeItem(key);
     }
     localStorage.setItem(key, JSON.stringify(value));
+
+    this._removeCachedElements();
   }
 
   addItemsToCache(items: Item[]): void {
@@ -239,6 +241,17 @@ export class LocalStorageService {
         
         this.monstersByLang = duplicate;
       }
+    }
+  }
+
+  private _removeCachedElements(): void {
+    const items = [
+      'itemsByLang',
+      'monstersByCategoriesByLang',
+      'monstersByLang'
+    ];
+    for (const item of items) {
+      localStorage.removeItem(item);
     }
   }
   

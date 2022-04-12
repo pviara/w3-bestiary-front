@@ -24,12 +24,10 @@ export class VersionService {
               const { version: cachedVersion } = this._localStorageService;
               if (cachedVersion !== version.content) {
                 this._localStorageService.version = version.content;
-                console.log('changed version', this._localStorageService.version);
               }
 
             } catch (e: unknown) {
               this._localStorageService.version = version.content;
-              console.log('added version', this._localStorageService.version);
               
             }
           }
