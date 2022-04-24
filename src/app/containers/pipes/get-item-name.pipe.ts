@@ -1,5 +1,8 @@
 import { Item } from 'src/app/models/item/item';
-import { Pipe, PipeTransform } from '@angular/core';
+import {
+    Pipe,
+    PipeTransform
+} from '@angular/core';
 
 @Pipe({
     name: 'get_item_name'

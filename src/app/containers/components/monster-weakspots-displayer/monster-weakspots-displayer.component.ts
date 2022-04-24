@@ -1,4 +1,8 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnChanges
+} from '@angular/core';
 import { Item } from 'src/app/models/item/item';
 import { MonsterWeakspots } from 'src/app/models/monster/monster';
 

@@ -1,9 +1,9 @@
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Item } from 'src/app/models/item/item';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { of, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ItemsService {
