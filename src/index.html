@@ -12,5 +12,21 @@
 </head>
 <body>
   <app-root></app-root>
+  <script lang="text/javascript">
+    const { hostname } = window.location;
+
+    if (hostname === 'w3.bestiary.app') {
+      const meta = document.createElement('meta');
+      meta.name = 'google-site-verification';
+      meta.content = '9_j9gtST2L1h8HOcW5NJPQQ4FiNtZqXgLCkct10vB4M';
+      document.head.append(meta);
+
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'robots';
+      meta.content = 'noindex';
+      document.head.append(meta);
+    }
+  </script>
 </body>
 </html>
