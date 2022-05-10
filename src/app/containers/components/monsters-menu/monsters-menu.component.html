@@ -1,4 +1,6 @@
-<div *ngIf="monsterCategories" class="container">
+<div
+  *ngIf="monsterCategories"
+  [ngClass]="hasMonsterBeenClicked ? 'hidden' : 'container'">
   <div class="searchbar">
     <input
       type="text"
@@ -30,7 +32,8 @@
             <div
               class="clickable-monster"
               [routerLink]="monster.code"
-              routerLinkActive="selected">
+              routerLinkActive="selected"
+              (click)="onMonsterClick()">
               
               <div class="thumbnail">
                 <img
