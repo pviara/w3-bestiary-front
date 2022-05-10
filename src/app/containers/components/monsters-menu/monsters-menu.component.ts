@@ -1,9 +1,11 @@
 import { ActivatedRoute } from '@angular/router';
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
-  OnInit
+  OnInit,
+  Output
 } from '@angular/core';
 import { MonstersByCategory } from 'src/app/models/monster/monster';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -15,9 +17,15 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class MonstersMenuComponent implements OnChanges, OnInit {
   filteredMonstersByCategory!: MonstersByCategory[];
+
+  @Input()
+  hasMonsterBeenClicked!: boolean;
   
   @Input()
   monsterCategories!: MonstersByCategory[];
+
+  @Output()
+  monsterHasBeenClicked = new EventEmitter<boolean>();
 
   notFoundMonsterMessage = 'No monster was found';
 
@@ -73,6 +81,10 @@ export class MonstersMenuComponent implements OnChanges, OnInit {
       .some(
         selectedCategory => selectedCategory === categoryName
       );
+  }
+
+  onMonsterClick() {
+    this.monsterHasBeenClicked.emit(true);
   }
 
   openCurrentMonsterCategory() {

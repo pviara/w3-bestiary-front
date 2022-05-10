@@ -11,6 +11,8 @@ import { MonstersService } from './services/monsters.service';
 export class MonstersExplorerComponent {
   categories!: MonstersByCategory[];
 
+  hasMonsterBeenClicked = false;
+  
   constructor(
     private _localStorageService: LocalStorageService,
     private _monstersService: MonstersService
@@ -28,5 +30,9 @@ export class MonstersExplorerComponent {
             );
         }
       );
+  }
+
+  setHasMonsterBeenClicked(event: boolean) {
+    this.hasMonsterBeenClicked = event;
   }
 }
