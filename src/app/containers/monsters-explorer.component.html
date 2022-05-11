@@ -1,5 +1,8 @@
 <div class="container">
-  <div *ngIf="categories" class="menu">
+  <div
+    *ngIf="categories"
+    class="menu"
+    [ngClass]="hasMonsterBeenClicked ? 'hidden' : ''">
     <monsters-menu
       [hasMonsterBeenClicked]="hasMonsterBeenClicked"
       [monsterCategories]="categories"
