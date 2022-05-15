@@ -1,31 +1,39 @@
-.container {
-  display: flex;
+@media (min-width: 1460px) {
+  .container {
+    display: flex;
 
-  max-height: 100%;
+    max-height: 100%;
 
-  div {
-    flex: 1;
-  
-    animation: fadeIn ease 0.5s;
+    div {
+      flex: 1;
+    
+      animation: fadeIn ease 0.5s;
 
-    &.central {
-      height: 55em;
-      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      &.central {
+        height: 55em;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-      .image {
-        flex: 2;
+        .image {
+          flex: 2;
+        }
+
+        .weakspots {
+          flex: 1;
+        }
       }
 
-      .weakspots {
-        flex: 1;
+      &.textes {
+        overflow-y: scroll;
       }
     }
+  }
+}
 
-    &.textes {
-      overflow-y: scroll;
-    }
+@media (max-width: 1460px) {
+  .container {
+    display: flex;
   }
 }
