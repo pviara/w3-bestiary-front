@@ -1,3 +1,8 @@
+.image {
+  display: flex;
+  justify-content: center;
+}
+
 @media (min-width: 1460px) {
   .container {
     display: flex;
@@ -16,10 +21,6 @@
         flex-direction: column;
         align-items: center;
 
-        .image {
-          flex: 2;
-        }
-
         .weakspots {
           flex: 1;
         }
@@ -32,8 +33,23 @@
   }
 }
 
-@media (max-width: 1460px) {
+@media (max-width: 500px) {
   .container {
     display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    div {
+      flex: 1;
+    
+      animation: fadeIn ease 0.5s;
+
+      .image {
+        img {
+          max-width: 20em;
+        }
+      }
+    }
   }
 }

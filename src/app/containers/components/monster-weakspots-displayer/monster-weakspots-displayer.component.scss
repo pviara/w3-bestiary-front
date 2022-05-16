@@ -1,16 +1,24 @@
 .container {
     .items {
         display: flex;
+        justify-content: center;
+
+        flex-wrap: wrap;
 
         .item {
             margin: 0.5em;
             border: 3px double #2b2219;
             
-            img {
-              min-height: 72px;
-              min-width: 72px;
-              max-height: 72px;
-              max-width: 72px;
+            @media (max-width: 1460px) {
+                img {
+                    max-width: 3.5em;
+                }
+            }
+            
+            @media (min-width: 500px) {
+                img {
+                    max-width: 5em;
+                }
             }
         }
     }
