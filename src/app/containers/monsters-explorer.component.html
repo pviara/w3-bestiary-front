@@ -1,5 +1,11 @@
 <div class="container">
   <div
+    [ngClass]="hasMonsterBeenClicked ? 'back' : ''"
+    (click)="goBack()"
+    >
+    ⬅
+  </div>
+  <div
     *ngIf="categories"
     class="menu"
     [ngClass]="hasMonsterBeenClicked ? 'hidden' : ''">

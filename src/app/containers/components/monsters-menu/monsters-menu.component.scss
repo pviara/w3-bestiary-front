@@ -1,5 +1,7 @@
 .container {
   border: 3px double #2b2219;
+    
+  animation: fadeIn ease 0.5s;
 
   .searchbar {
     display: flex;

@@ -37,6 +37,10 @@ export class MonstersExplorerComponent {
       );
   }
 
+  goBack() {
+    this._router.navigate(['../']);
+  }
+
   setHasMonsterBeenClicked(event: boolean) {
     this.hasMonsterBeenClicked = event;
     console.log(this.hasMonsterBeenClicked);

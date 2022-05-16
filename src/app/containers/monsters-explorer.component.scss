@@ -15,6 +15,10 @@
     }
   }
 
+  .back {
+    display: none;
+  }
+
 }
 
 @media (max-width: 1460px) {
@@ -22,5 +26,14 @@
     &.hidden {
       display: none;
     }
+  }
+
+  .back {
+    position: absolute;
+    left: 0.5em;
+    top: 0;
+
+    font-size: 300%;
+    color: #a09d9a;
   }
 }
