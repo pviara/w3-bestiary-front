@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 @media (min-width: 1460px) {
   .container {
     display: flex;
@@ -22,12 +26,6 @@
 }
 
 @media (max-width: 1460px) {
-  .menu {
-    &.hidden {
-      display: none;
-    }
-  }
-
   .back {
     position: absolute;
     left: 0.5em;
