@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
       Thank you for visiting this website.
 
-      You may wonder why I've developed such a website. Well I was watching The Witcher on Netflix and I surprised myself pausing it several times, googling the monsters I would see on the screen. And I was like : "isn't there any website that references all of these monsters ? In both french and english ? And without any annoying ad?" And I just couldn't find it! So I decided to build one from scratch.
+      You may wonder why I've developed such a website. Well I was watching The Witcher on Netflix and I surprised myself pausing it several times, googling the monsters I would see on the screen. And I was like : "isn't there any website that references all of these monsters? In both french and english? And without any annoying ad?" And I just couldn't find it! So I decided to build one from scratch.
 
       Repositories are open-source and available here :
       · https://github.com/fairyfingers/w3-bestiary-back
