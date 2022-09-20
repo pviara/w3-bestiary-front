@@ -107,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "w3-bestiary-front"
+  "cli": {
+    "analytics": false
+  }
 }
