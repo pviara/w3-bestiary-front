@@ -1,3 +1,4 @@
+import { AssembleImagePathPipe } from './pipes/assemble-image-path.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { WeakspotTooltipDirective } from './directives/weakspot-tooltip.directiv
 
 @NgModule({
   declarations: [
+    AssembleImagePathPipe,
     CapitalizePipe,
     GetItemNamePipe,
     MonstersExplorerComponent,
