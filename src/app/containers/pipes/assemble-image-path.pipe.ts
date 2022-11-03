@@ -1,3 +1,4 @@
+import { ImageType } from "src/app/models/app/image-type";
 import { MonstersService } from "../services/monsters.service";
 import { Pipe, PipeTransform } from "@angular/core";
 
@@ -9,7 +10,7 @@ export class AssembleImagePathPipe implements PipeTransform {
         private readonly _monsterService: MonstersService
     ) {}
     
-    transform(code: string) {
-        return this._monsterService.assembleImagePath(code);
+    transform(code: string, imageType: ImageType) {
+        return this._monsterService.assembleImagePath(code, imageType);
     }
 }

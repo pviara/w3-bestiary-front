@@ -1,5 +1,6 @@
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { ImageType } from 'src/app/models/app/image-type';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Monster, MonstersByCategory } from 'src/app/models/monster/monster';
@@ -9,15 +10,13 @@ import { Typo } from 'src/app/models/typo/typo';
 
 @Injectable()
 export class MonstersService {
-  private _imagePath = `${environment.apiURL}/monster/image`
-  
   constructor(
     private _httpClient: HttpClient,
     private _localStorageService: LocalStorageService
   ) {}
 
-  assembleImagePath(code: string) {
-    return `${this._imagePath}?code=${code}`;
+  assembleImagePath(code: string, imageType: ImageType) {
+    return `${environment.apiURL}/monster/${imageType}?code=${code}`;
   }
 
   getMonster(code: string) {
