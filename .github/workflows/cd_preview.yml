@@ -26,4 +26,4 @@ jobs:
                     git checkout develop
                     git pull
                     npm ci
-                    npm run build
+                    npm run build:preview
