@@ -34,10 +34,6 @@ export class MonsterViewerComponent {
     this.reloadMonsterWhenLangChanged();
   }
 
-  assembleImagePath(code: string) {
-    return `../../../../assets/bestiary/images/${code}.png`;
-  }
-
   onReportTextTypo(typo: string) {
     this.hasIssueBeenCreated = false;
     
