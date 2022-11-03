@@ -3,7 +3,7 @@
     <div class="image">
       <img
         draggable="false"
-        [src]="assembleImagePath(monster.code)">
+        [src]="monster.code | assembleImagePath">
     </div>
     <div *ngIf="monster.weakspots" class="weakspots">
       <monster-weakspots-displayer

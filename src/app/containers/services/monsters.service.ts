@@ -9,10 +9,16 @@ import { Typo } from 'src/app/models/typo/typo';
 
 @Injectable()
 export class MonstersService {
+  private _imagePath = `${environment.apiURL}/monster/image`
+  
   constructor(
     private _httpClient: HttpClient,
     private _localStorageService: LocalStorageService
   ) {}
+
+  assembleImagePath(code: string) {
+    return `${this._imagePath}?code=${code}`;
+  }
 
   getMonster(code: string) {
     const { lang } = this._localStorageService;
