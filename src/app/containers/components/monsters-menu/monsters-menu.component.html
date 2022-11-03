@@ -36,7 +36,7 @@
               <div class="thumbnail">
                 <img
                   draggable="false"
-                  [src]="assembleImagePath(monster.code)">
+                  [src]="monster.code | assembleImagePath:'thumbnail'">
               </div>
               
               <div class="monster-title">
