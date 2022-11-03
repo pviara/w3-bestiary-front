@@ -12,6 +12,10 @@ export class ItemsService {
     private _localStorageService: LocalStorageService
   ) {}
 
+  assembleImagePath(code: string) {
+    return `${environment.apiURL}/item/thumbnail?code=${code}`;
+  }
+  
   getItems() {
     const { lang } = this._localStorageService;
 

@@ -6,7 +6,7 @@
             <div weakspotTooltip [name]="weakspot | get_item_name:items">
                 <img
                   draggable="false"
-                  [src]="assembleImagePath(weakspot)">
+                  [src]="weakspot | assembleImagePath:'item':'thumbnail'">
             </div>
         </div>
     </div>
