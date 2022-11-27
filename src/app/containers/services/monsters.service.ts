@@ -30,7 +30,7 @@ export class MonstersService {
     return this
       ._httpClient
       .get<Monster>(
-        `${environment.apiURL}/monster/search?code=${code}&lang=${lang}`
+        `${environment.apiURL}/monster/${code}?lang=${lang}`
       ).pipe(
         tap(
           monster => this
