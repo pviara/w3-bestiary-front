@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { Component } from '@angular/core';
 import { Item } from 'src/app/models/item/item';
 import { ItemsService } from '../../services/items.service';
@@ -29,9 +30,8 @@ export class MonsterViewerComponent {
   ) { }
 
   ngOnInit() {
-    this.loadMonsterWhenChangedCodeParam();
     this.reloadItemsWhenLangChanged();
-    this.reloadMonsterWhenLangChanged();
+    this.reloadMonsterWhenNeeded();
   }
 
   onReportTextTypo(typo: string) {
@@ -71,21 +71,21 @@ export class MonsterViewerComponent {
       );
   }
 
-  private loadMonsterWhenChangedCodeParam() {
-    this._route
-      .params
-      .subscribe(
-        params => {
-          const monsterCode = params['code'];
-          if (monsterCode) {
-            this._monstersService
-              .getMonster(monsterCode)
-              .subscribe(
-                monster => this.monster = monster
-              );
-          }
-        }
-      );
+  private reloadMonsterWhenNeeded() {
+    combineLatest([
+      this._localStorageService.langSubject,
+      this._route.params,
+    ]).subscribe(([, params])=> {
+      const monsterCode = params['code'];
+      
+      if (monsterCode) {
+        this._monstersService
+          .getMonster(monsterCode)
+          .subscribe(
+            monster => this.monster = monster
+          );
+      }
+    });
   }
 
   private reloadItemsWhenLangChanged() {
@@ -98,23 +98,6 @@ export class MonsterViewerComponent {
             .subscribe(
               items => this.items = items
             )
-        }
-      );
-  }
-
-  private reloadMonsterWhenLangChanged() {
-    this._localStorageService
-      .langSubject
-      .subscribe(
-        _ => {
-          const monsterCode = this._route.snapshot.params['code'];
-          if (monsterCode) {
-            this._monstersService
-              .getMonster(monsterCode)
-              .subscribe(
-                monster => this.monster = monster
-              );
-          }
         }
       );
   }
