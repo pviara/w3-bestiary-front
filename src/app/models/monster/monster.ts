@@ -1,9 +1,15 @@
+export enum GameExpansionSet {
+    HeartsOfStone = 'hearts-of-stone',
+    BloodAndWine = 'blood-and-wine',
+}
+
 export class Monster {
     constructor(
         readonly category: string,
         readonly code: string,
         readonly textes: MonsterTextes,
-        readonly weakspots: MonsterWeakspots
+        readonly weakspots: MonsterWeakspots,
+        readonly extension?: GameExpansionSet,
     ) {}
 }
 
@@ -49,7 +55,8 @@ export class MonstersByCategoryCategory {
 export class MonsterByCategory {
     constructor(
         readonly code: string,
-        readonly textes: Pick<MonsterTextes, 'name'>
+        readonly textes: Pick<MonsterTextes, 'name'>,
+        readonly extension: GameExpansionSet,
     ) {}
 }
 

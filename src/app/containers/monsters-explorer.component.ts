@@ -43,7 +43,6 @@ export class MonstersExplorerComponent {
 
   setHasMonsterBeenClicked(event: boolean) {
     this.hasMonsterBeenClicked = event;
-    console.log(this.hasMonsterBeenClicked);
   }
 
   private _hideMonsterMenu() {

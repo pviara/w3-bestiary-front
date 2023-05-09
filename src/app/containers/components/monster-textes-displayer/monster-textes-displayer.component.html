@@ -1,6 +1,23 @@
 <div mousePosition class="container">
   <div class="title">
     <h1>{{ textes.name | uppercase }}</h1>
+
+    <ng-container *ngIf="extension">
+      <ng-container [ngSwitch]="extension">
+        <ng-container *ngSwitchCase="'blood-and-wine'">
+          <img
+            class="expansion-logo"
+            draggable="false"
+            src="../../../../assets/icons/app/logo_blood-and-wine.webp">
+        </ng-container>
+        <ng-container *ngSwitchCase="'hearts-of-stone'">
+          <img
+            class="expansion-logo"
+            draggable="false"
+            src="../../../../assets/icons/app/logo_hearts-of-stone.png">
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
   <div class="content">
     <ng-container *ngIf="textes.quote?.text">

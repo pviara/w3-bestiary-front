@@ -14,6 +14,7 @@
   </div>
   <div *ngIf="monster.textes" class="textes">
     <monster-textes-displayer
+      [extension]="monster.extension"
       [hasIssueBeenCreated]="hasIssueBeenCreated"
       [reportedTypo]="reportedTypo"
       [textes]="monster.textes"
