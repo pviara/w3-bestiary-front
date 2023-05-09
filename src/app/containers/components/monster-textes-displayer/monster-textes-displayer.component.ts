@@ -8,7 +8,7 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import { MonsterTextes } from 'src/app/models/monster/monster';
+import { GameExpansionSet, MonsterTextes } from 'src/app/models/monster/monster';
 import { Typo } from 'src/app/models/typo/typo';
 
 @Component({
@@ -18,6 +18,9 @@ import { Typo } from 'src/app/models/typo/typo';
   styleUrls: ['./monster-textes-displayer.component.scss']
 })
 export class MonsterTextesDisplayerComponent implements AfterViewInit {
+  @Input()
+  extension?: GameExpansionSet;
+  
   @Input()
   hasIssueBeenCreated!: boolean;
   

@@ -8,13 +8,22 @@
 
   .title {
     flex: 1;
+    display: flex;
 
+    justify-content: space-between;
+    align-items: center;
+    
     margin-top: 0.5em;
     margin-left: 0.5em;
     margin-right: 0.5em;
     padding: 0.5em;
 
     border: 3px double #2b2219;
+
+    .expansion-logo {
+      width: 75px;
+      height: 19px;
+    }
   }
 
   .content {
