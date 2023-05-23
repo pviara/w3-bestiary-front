@@ -1,24 +1,22 @@
 import { CapitalizePipe } from '../pipes/capitalize.pipe';
-import {
-    Directive,
-    ElementRef,
-    HostListener,
-    Input
-} from "@angular/core";
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
     selector: '[weakspotTooltip]',
-    providers: [CapitalizePipe]
+    providers: [CapitalizePipe],
 })
 export class WeakspotTooltipDirective {
     @Input()
     name: string | null | undefined;
-    
+
     @HostListener('mouseenter')
     onMouseEnter() {
-        const { top, left }: {
+        const {
+            top,
+            left,
+        }: {
             left: number;
-            top: number
+            top: number;
         } = this.elementRef.nativeElement.getBoundingClientRect();
 
         this._createTooltip(left, top);
@@ -28,12 +26,12 @@ export class WeakspotTooltipDirective {
     onMouseLeave() {
         this._removeTooltip();
     }
-    
+
     private _tooltipId = 'tooltip';
-    
+
     constructor(
         private capitalizePipe: CapitalizePipe,
-        private elementRef: ElementRef
+        private elementRef: ElementRef,
     ) {}
 
     ngOnChanges() {
@@ -41,7 +39,7 @@ export class WeakspotTooltipDirective {
             this.name = this.capitalizePipe.transform(this.name);
         }
     }
-    
+
     private _createTooltip(x: number, y: number) {
         const tooltip = document.createElement('div');
 
@@ -51,7 +49,7 @@ export class WeakspotTooltipDirective {
         tooltip.style.top = `${y - 80}px`;
 
         tooltip.id = this._tooltipId;
-        
+
         document.body.appendChild(tooltip);
     }
 

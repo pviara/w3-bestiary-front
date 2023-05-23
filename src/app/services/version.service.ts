@@ -7,31 +7,26 @@ import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
 export class VersionService {
-  constructor(
-    private _httpClient: HttpClient,
-    private _localStorageService: LocalStorageService
-  ) {}
-  
-  getVersion() {
-    return this
-      ._httpClient
-      .get<Version>(
-        `${environment.apiURL}/version`
-      ).pipe(
-        tap(
-          version => {
-            try {
-              const { version: cachedVersion } = this._localStorageService;
-              if (cachedVersion !== version.content) {
-                this._localStorageService.version = version.content;
-              }
+    constructor(
+        private _httpClient: HttpClient,
+        private _localStorageService: LocalStorageService,
+    ) {}
 
-            } catch (e: unknown) {
-              this._localStorageService.version = version.content;
-              
-            }
-          }
-        )
-      );
-  }
+    getVersion() {
+        return this._httpClient
+            .get<Version>(`${environment.apiURL}/version`)
+            .pipe(
+                tap((version) => {
+                    try {
+                        const { version: cachedVersion } =
+                            this._localStorageService;
+                        if (cachedVersion !== version.content) {
+                            this._localStorageService.version = version.content;
+                        }
+                    } catch (e: unknown) {
+                        this._localStorageService.version = version.content;
+                    }
+                }),
+            );
+    }
 }
