@@ -1,9 +1,9 @@
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Version } from '../models/app/version';
 import { LocalStorageService } from './local-storage.service';
+import { tap } from 'rxjs';
+import { Version } from '../models/app/version';
 
 @Injectable()
 export class VersionService {

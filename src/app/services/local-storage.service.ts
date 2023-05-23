@@ -21,6 +21,18 @@ export class LocalStorageService {
         return JSON.parse(itemsByLang) as ItemsByLang[];
     }
 
+    set itemsByLang(value: ItemsByLang[]) {
+        if (!value) {
+            return;
+        }
+        const key = 'itemsByLang';
+
+        if (this._getFromStorage(key)) {
+            localStorage.removeItem(key);
+        }
+        localStorage.setItem(key, JSON.stringify(value));
+    }
+
     get lang(): string {
         const langFromStorage = this._getFromStorage('lang');
         if (!langFromStorage) {
@@ -29,6 +41,20 @@ export class LocalStorageService {
         }
 
         return JSON.parse(langFromStorage) as string;
+    }
+
+    set lang(value: string) {
+        if (!value) {
+            return;
+        }
+        const key = 'lang';
+
+        if (this._getFromStorage(key)) {
+            localStorage.removeItem(key);
+        }
+        localStorage.setItem(key, JSON.stringify(value));
+
+        this.langSubject.next(value);
     }
 
     get monstersByCategoriesByLang(): MonstersByCategoriesByLang[] {
@@ -46,51 +72,6 @@ export class LocalStorageService {
         ) as MonstersByCategoriesByLang[];
     }
 
-    get monstersByLang(): MonstersByLang[] {
-        const monstersByLangFromStorage =
-            this._getFromStorage('monstersByLang');
-        if (!monstersByLangFromStorage) {
-            throw new Error('No monster by lang is stored in local storage.');
-        }
-
-        return JSON.parse(monstersByLangFromStorage) as MonstersByLang[];
-    }
-
-    get version(): string {
-        const version = this._getFromStorage('version');
-        if (!version) {
-            throw new Error('No version is stored in local storage.');
-        }
-
-        return JSON.parse(version) as string;
-    }
-
-    set itemsByLang(value: ItemsByLang[]) {
-        if (!value) {
-            return;
-        }
-        const key = 'itemsByLang';
-
-        if (this._getFromStorage(key)) {
-            localStorage.removeItem(key);
-        }
-        localStorage.setItem(key, JSON.stringify(value));
-    }
-
-    set lang(value: string) {
-        if (!value) {
-            return;
-        }
-        const key = 'lang';
-
-        if (this._getFromStorage(key)) {
-            localStorage.removeItem(key);
-        }
-        localStorage.setItem(key, JSON.stringify(value));
-
-        this.langSubject.next(value);
-    }
-
     set monstersByCategoriesByLang(value: MonstersByCategoriesByLang[]) {
         if (!value) {
             return;
@@ -103,6 +84,16 @@ export class LocalStorageService {
         localStorage.setItem(key, JSON.stringify(value));
     }
 
+    get monstersByLang(): MonstersByLang[] {
+        const monstersByLangFromStorage =
+            this._getFromStorage('monstersByLang');
+        if (!monstersByLangFromStorage) {
+            throw new Error('No monster by lang is stored in local storage.');
+        }
+
+        return JSON.parse(monstersByLangFromStorage) as MonstersByLang[];
+    }
+
     set monstersByLang(value: MonstersByLang[]) {
         if (!value) {
             return;
@@ -113,6 +104,15 @@ export class LocalStorageService {
             localStorage.removeItem(key);
         }
         localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    get version(): string {
+        const version = this._getFromStorage('version');
+        if (!version) {
+            throw new Error('No version is stored in local storage.');
+        }
+
+        return JSON.parse(version) as string;
     }
 
     set version(value: string) {

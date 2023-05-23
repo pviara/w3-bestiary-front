@@ -24,7 +24,7 @@ export class MonstersExplorerComponent {
     ngOnInit() {
         this._hideMonsterMenu();
 
-        this._localStorageService.langSubject.subscribe((_) => {
+        this._localStorageService.langSubject.subscribe(() => {
             this._monstersService
                 .getMonstersByCategories()
                 .subscribe(
