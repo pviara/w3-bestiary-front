@@ -81,7 +81,7 @@ export class MonsterViewerComponent {
     }
 
     private reloadItemsWhenLangChanged() {
-        this._localStorageService.langSubject.subscribe((_) => {
+        this._localStorageService.langSubject.subscribe(() => {
             this._itemsService
                 .getItems()
                 .subscribe((items) => (this.items = items));

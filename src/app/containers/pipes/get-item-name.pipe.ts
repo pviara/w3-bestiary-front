@@ -5,8 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'get_item_name',
 })
 export class GetItemNamePipe implements PipeTransform {
-    constructor() {}
-
     transform(code: string, items: Item[]) {
         return items.find((item) => item.code === code)?.name;
     }
