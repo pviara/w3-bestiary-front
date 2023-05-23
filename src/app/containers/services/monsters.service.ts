@@ -10,101 +10,87 @@ import { Typo } from 'src/app/models/typo/typo';
 
 @Injectable()
 export class MonstersService {
-  constructor(
-    private _httpClient: HttpClient,
-    private _localStorageService: LocalStorageService
-  ) {}
+    constructor(
+        private _httpClient: HttpClient,
+        private _localStorageService: LocalStorageService,
+    ) {}
 
-  assembleImagePath(code: string, imageType: ImageType) {
-    return `${environment.apiURL}/monster/${imageType}?code=${code}`;
-  }
-
-  getMonster(code: string) {
-    const { lang } = this._localStorageService;
-
-    const cached = this._findMonsterByLang(lang, code);
-    if (cached) {
-      return of(cached);
+    assembleImagePath(code: string, imageType: ImageType) {
+        return `${environment.apiURL}/monster/${imageType}?code=${code}`;
     }
-    
-    return this
-      ._httpClient
-      .get<Monster>(
-        `${environment.apiURL}/monster/${code}?lang=${lang}`
-      ).pipe(
-        tap(
-          monster => this
-            ._localStorageService
-            .addMonsterToCache(monster)
-        )
-      );
-  }
 
-  getMonstersByCategories() {
-    const { lang } = this._localStorageService;
+    getMonster(code: string) {
+        const { lang } = this._localStorageService;
 
-    const cached = this._findMonstersByCategoriesByLang(lang);
-    if (cached) {
-      return of(cached);
+        const cached = this._findMonsterByLang(lang, code);
+        if (cached) {
+            return of(cached);
+        }
+
+        return this._httpClient
+            .get<Monster>(`${environment.apiURL}/monster/${code}?lang=${lang}`)
+            .pipe(
+                tap((monster) =>
+                    this._localStorageService.addMonsterToCache(monster),
+                ),
+            );
     }
-    
-    return this
-      ._httpClient
-      .get<MonstersByCategory[]>(
-        `${environment.apiURL}/monster?lang=${lang}`
-      )
-      .pipe(
-        tap(
-          monstersByCategories => this
-            ._localStorageService
-            .addMonstersByCategoriesToCache(monstersByCategories)
-        )
-      );
-  }
 
-  reportTextTypo(monsterCode: string, typo: string) {
-    const { lang } = this._localStorageService;
+    getMonstersByCategories() {
+        const { lang } = this._localStorageService;
 
-    const payload = new ReportTextTypoPayload(lang, monsterCode, typo);
+        const cached = this._findMonstersByCategoriesByLang(lang);
+        if (cached) {
+            return of(cached);
+        }
 
-    return this
-      ._httpClient
-      .post<Typo>(
-        `${environment.apiURL}/monster/typo`, payload
-      );
-  }
-
-  private _findMonstersByCategoriesByLang(lang: string): MonstersByCategory[] | undefined {
-    try {
-      return this
-      ._localStorageService
-      .monstersByCategoriesByLang
-      .find(
-        cached => cached.lang === lang
-      )
-      ?.monsters;
-
-    } catch (e: unknown) {
-      return undefined;
+        return this._httpClient
+            .get<MonstersByCategory[]>(
+                `${environment.apiURL}/monster?lang=${lang}`,
+            )
+            .pipe(
+                tap((monstersByCategories) =>
+                    this._localStorageService.addMonstersByCategoriesToCache(
+                        monstersByCategories,
+                    ),
+                ),
+            );
     }
-  }
 
-  private _findMonsterByLang(lang: string, code: string): Monster | undefined {
-    try {
-      const match = this
-      ._localStorageService
-      .monstersByLang
-      .find(
-        cached => cached.lang === lang
-      )
-      ?.monsters
-      .find(
-        monster => monster.code === code
-      );
-      return match;
-      
-    } catch (e: unknown) {
-      return undefined;
+    reportTextTypo(monsterCode: string, typo: string) {
+        const { lang } = this._localStorageService;
+
+        const payload = new ReportTextTypoPayload(lang, monsterCode, typo);
+
+        return this._httpClient.post<Typo>(
+            `${environment.apiURL}/monster/typo`,
+            payload,
+        );
     }
-  }
+
+    private _findMonstersByCategoriesByLang(
+        lang: string,
+    ): MonstersByCategory[] | undefined {
+        try {
+            return this._localStorageService.monstersByCategoriesByLang.find(
+                (cached) => cached.lang === lang,
+            )?.monsters;
+        } catch (e: unknown) {
+            return undefined;
+        }
+    }
+
+    private _findMonsterByLang(
+        lang: string,
+        code: string,
+    ): Monster | undefined {
+        try {
+            const match = this._localStorageService.monstersByLang
+                .find((cached) => cached.lang === lang)
+                ?.monsters.find((monster) => monster.code === code);
+            return match;
+        } catch (e: unknown) {
+            return undefined;
+        }
+    }
 }

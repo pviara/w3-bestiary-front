@@ -7,8 +7,8 @@ import { VersionService } from '../../services/version.service';
 @Injectable()
 export class VersionResolver implements Resolve<Observable<Version>> {
     constructor(private _versionService: VersionService) {}
-    
+
     resolve() {
-      return this._versionService.getVersion();
+        return this._versionService.getVersion();
     }
 }

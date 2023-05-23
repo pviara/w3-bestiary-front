@@ -6,9 +6,9 @@ import { Resolve } from '@angular/router';
 
 @Injectable()
 export class ItemsResolver implements Resolve<Observable<Item[]>> {
-  constructor(private _itemsService: ItemsService) {}
+    constructor(private _itemsService: ItemsService) {}
 
-  resolve() {
-    return this._itemsService.getItems();
-  }
+    resolve() {
+        return this._itemsService.getItems();
+    }
 }

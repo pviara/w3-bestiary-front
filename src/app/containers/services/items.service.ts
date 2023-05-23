@@ -7,48 +7,39 @@ import { of, tap } from 'rxjs';
 
 @Injectable()
 export class ItemsService {
-  constructor(
-    private _httpClient: HttpClient,
-    private _localStorageService: LocalStorageService
-  ) {}
+    constructor(
+        private _httpClient: HttpClient,
+        private _localStorageService: LocalStorageService,
+    ) {}
 
-  assembleImagePath(code: string) {
-    return `${environment.apiURL}/item/thumbnail?code=${code}`;
-  }
-  
-  getItems() {
-    const { lang } = this._localStorageService;
-
-    const cached = this._findItemsByLang(lang);
-    if (cached) {
-      return of(cached);
+    assembleImagePath(code: string) {
+        return `${environment.apiURL}/item/thumbnail?code=${code}`;
     }
-    
-    return this
-      ._httpClient
-      .get<Item[]>(
-        `${environment.apiURL}/item?lang=${lang}`
-      ).pipe(
-        tap(
-          items => this
-            ._localStorageService
-            .addItemsToCache(items)
-        )
-      );
-  }
 
-  private _findItemsByLang(lang: string): Item[] | undefined {
-    try {
-      return this
-      ._localStorageService
-      .itemsByLang
-      .find(
-        cached => cached.lang === lang
-      )
-      ?.items;
+    getItems() {
+        const { lang } = this._localStorageService;
 
-    } catch (e: unknown) {
-      return undefined;
+        const cached = this._findItemsByLang(lang);
+        if (cached) {
+            return of(cached);
+        }
+
+        return this._httpClient
+            .get<Item[]>(`${environment.apiURL}/item?lang=${lang}`)
+            .pipe(
+                tap((items) =>
+                    this._localStorageService.addItemsToCache(items),
+                ),
+            );
     }
-  }
+
+    private _findItemsByLang(lang: string): Item[] | undefined {
+        try {
+            return this._localStorageService.itemsByLang.find(
+                (cached) => cached.lang === lang,
+            )?.items;
+        } catch (e: unknown) {
+            return undefined;
+        }
+    }
 }

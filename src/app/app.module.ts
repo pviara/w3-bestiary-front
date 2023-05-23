@@ -9,20 +9,9 @@ import { VersionService } from './services/version.service';
 import { VersionResolver } from './containers/resolvers/version.resolver';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LangSelectorComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MonstersExplorerModule
-  ],
-  providers: [
-    LocalStorageService,
-    VersionResolver,
-    VersionService,
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent, LangSelectorComponent],
+    imports: [BrowserModule, AppRoutingModule, MonstersExplorerModule],
+    providers: [LocalStorageService, VersionResolver, VersionService],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

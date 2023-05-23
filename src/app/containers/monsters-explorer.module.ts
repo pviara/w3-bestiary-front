@@ -18,33 +18,23 @@ import { RouterModule } from '@angular/router';
 import { WeakspotTooltipDirective } from './directives/weakspot-tooltip.directive';
 
 @NgModule({
-  declarations: [
-    AssembleImagePathPipe,
-    CapitalizePipe,
-    GetItemNamePipe,
-    MonstersExplorerComponent,
-    MonstersMenuComponent,
-    MonsterTextesDisplayerComponent,
-    MonsterViewerComponent,
-    MonsterWeakspotsDisplayerComponent,
-    WeakspotTooltipDirective
-  ],
-  exports: [
-    MonstersExplorerComponent,
-    MonstersMenuComponent,
-    MonsterViewerComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule
-  ],
-  providers: [
-    ItemsResolver,
-    ItemsService,
-    MonsterGuard,
-    MonstersService,
-  ]
+    declarations: [
+        AssembleImagePathPipe,
+        CapitalizePipe,
+        GetItemNamePipe,
+        MonstersExplorerComponent,
+        MonstersMenuComponent,
+        MonsterTextesDisplayerComponent,
+        MonsterViewerComponent,
+        MonsterWeakspotsDisplayerComponent,
+        WeakspotTooltipDirective,
+    ],
+    exports: [
+        MonstersExplorerComponent,
+        MonstersMenuComponent,
+        MonsterViewerComponent,
+    ],
+    imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
+    providers: [ItemsResolver, ItemsService, MonsterGuard, MonstersService],
 })
-export class MonstersExplorerModule { }
+export class MonstersExplorerModule {}
