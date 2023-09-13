@@ -102,14 +102,22 @@ export class MonstersMenuComponent implements OnChanges, OnInit {
         this.toggleCategory(selectedMonsterCategory.category.code);
     }
 
+    resetSearch(): void {
+        this._hideSearchbarResetButton();
+        this.filteredMonstersByCategory = this.monsterCategories;
+        this.selectedCategories = [];
+        this.openCurrentMonsterCategory();
+        this.searchText = '';
+    }
+
     search(event: any) {
         const searchText = event?.target?.value;
         if (!searchText) {
-            this.filteredMonstersByCategory = this.monsterCategories;
-            this.selectedCategories = [];
-            this.openCurrentMonsterCategory();
+            this.resetSearch();
             return;
         }
+
+        this._displaySearchbarResetButton();
 
         const filtered: MonstersByCategory[] = [];
 
@@ -157,5 +165,13 @@ export class MonstersMenuComponent implements OnChanges, OnInit {
         } else {
             this.selectedCategories.push(categoryCode);
         }
+    }
+
+    private _displaySearchbarResetButton(): void {
+        document.querySelector('.reset-searchbar')?.classList.remove('hidden');
+    }
+
+    private _hideSearchbarResetButton(): void {
+        document.querySelector('.reset-searchbar')?.classList.add('hidden');
     }
 }
