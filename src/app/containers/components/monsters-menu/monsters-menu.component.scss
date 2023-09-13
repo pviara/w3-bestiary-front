@@ -4,6 +4,8 @@
   animation: fadeIn ease 0.5s;
 
   .searchbar {
+    position: relative;
+    
     display: flex;
     
     margin-left: 0.5em;
@@ -22,6 +24,28 @@
       font-size: 120%;
 
       outline: none;
+    }
+
+    .reset-searchbar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      
+      height: 100%;
+
+      border-left: none;
+      border-top: 1px solid #2b2219;
+      border-bottom: 1px solid #2b2219;
+      border-right: 1px solid #2b2219;
+      
+      background-color: black;
+
+      color: #a09d9a;
+      font-size: 150%;
+      font-weight: bold;
+
+      cursor: pointer;
     }
   }
 
@@ -115,5 +139,5 @@
 }
 
 .hidden {
-  display: hidden;
+  display: none;
 }

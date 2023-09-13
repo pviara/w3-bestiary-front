@@ -5,6 +5,11 @@
       [placeholder]="searchPlaceholder + '...'"
       [(ngModel)]="searchText"
       (input)="search($event)">
+    <button
+      class="reset-searchbar hidden"
+      (click)="resetSearch()">
+      x
+    </button>
   </div>
 
   <ng-container *ngIf="filteredMonstersByCategory.length > 0; else notFoundMonster">
