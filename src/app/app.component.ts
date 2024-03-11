@@ -20,10 +20,10 @@ export class AppComponent implements OnInit {
       You may wonder why I've developed such a website. Well I was watching The Witcher on Netflix and I surprised myself pausing it several times, googling the monsters I would see on the screen. And I was like : "isn't there any website that references all of these monsters? In both french and english? And without any annoying ad?" And I just couldn't find it! So I decided to build one from scratch.
 
       Repositories are open-source and available here :
-      · https://github.com/fairyfingers/w3-bestiary-back
-      · https://github.com/fairyfingers/w3-bestiary-front
+      · https://github.com/pviara/w3-bestiary-back
+      · https://github.com/pviara/w3-bestiary-front
 
-      API is completely free of use and some documentation is available at https://w3.bestiary.app/apiDocs
+      API is completely free of use and some documentation is available at https://witcher.pviara.dev/apidocs
 
 
       With this,

@@ -1,6 +1,6 @@
 {
   "name": "w3-bestiary-front",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "license": "MIT",
   "engines": {
     "node": ">= 14.15.0"
