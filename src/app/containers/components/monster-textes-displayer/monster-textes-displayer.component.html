@@ -1,6 +1,6 @@
 <div mousePosition class="container">
   <div class="title">
-    <h1>{{ textes.name | uppercase }}</h1>
+    <h1>{{ textes().name | uppercase }}</h1>
 
     <ng-container *ngIf="extension">
       <ng-container [ngSwitch]="extension">
@@ -20,33 +20,30 @@
     </ng-container>
   </div>
   <div class="content">
-    <ng-container *ngIf="textes.quote?.text">
+    <ng-container *ngIf="textes().quote?.text">
       <div class="quote">
         <p
           #quoteText
-          [innerHtml]="textes.quote.text"
-          (click)="handleSelection($event)">
+          [innerHtml]="textes().quote.text">
         </p>
         <p
           #author
-          class="author"
-          (click)="handleSelection($event)">
+          class="author">
           —
-          <ng-container *ngIf="textes.quote.author.firstname as firstname">
-            {{ firstname | capitalize }}<ng-container *ngIf="!textes.quote.author.lastname">,</ng-container>
+          <ng-container *ngIf="textes().quote.author.firstname as firstname">
+            {{ firstname | capitalize }}<ng-container *ngIf="!textes().quote.author.lastname">,</ng-container>
           </ng-container>
-          <ng-container *ngIf="textes.quote.author.lastname as lastname">
-            {{ lastname | capitalize }}<ng-container *ngIf="textes.quote.author.title">,</ng-container>
+          <ng-container *ngIf="textes().quote.author.lastname as lastname">
+            {{ lastname | capitalize }}<ng-container *ngIf="textes().quote.author.title">,</ng-container>
           </ng-container>
-          {{ textes.quote.author.title }}
+          {{ textes().quote.author.title }}
         </p>
       </div>
     </ng-container>
     <div class="description">
       <p
         #description
-        [innerHtml]="textes.description"
-        (click)="handleSelection($event)">
+        [innerHtml]="textes().description">
       </p>
     </div>
   </div>

@@ -2,11 +2,11 @@ import { ActivatedRoute } from '@angular/router';
 import {
     Component,
     EventEmitter,
-    Input,
     OnChanges,
     OnInit,
     Output,
     inject,
+    input,
 } from '@angular/core';
 import { MonstersByCategory } from 'src/app/models/monster/monster';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -19,11 +19,9 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class MonstersMenuComponent implements OnChanges, OnInit {
     filteredMonstersByCategory!: MonstersByCategory[];
 
-    @Input()
-    hasMonsterBeenClicked!: boolean;
+    hasMonsterBeenClicked = input.required<boolean>();
 
-    @Input()
-    monsterCategories!: MonstersByCategory[];
+    monsterCategories = input.required<MonstersByCategory[]>();
 
     @Output()
     monsterHasBeenClicked = new EventEmitter<boolean>();
@@ -42,7 +40,7 @@ export class MonstersMenuComponent implements OnChanges, OnInit {
     ngOnChanges() {
         this._localStorageService.langSubject.subscribe((lang) => {
             this.searchText = '';
-            this.filteredMonstersByCategory = this.monsterCategories;
+            this.filteredMonstersByCategory = this.monsterCategories();
             this.openCurrentMonsterCategory();
 
             switch (lang) {
@@ -63,7 +61,7 @@ export class MonstersMenuComponent implements OnChanges, OnInit {
     }
 
     ngOnInit() {
-        this.filteredMonstersByCategory = this.monsterCategories;
+        this.filteredMonstersByCategory = this.monsterCategories();
     }
 
     assembleImagePath(monsterCode: string) {
@@ -88,7 +86,7 @@ export class MonstersMenuComponent implements OnChanges, OnInit {
             return;
         }
 
-        const selectedMonsterCategory = this.monsterCategories.find(
+        const selectedMonsterCategory = this.monsterCategories().find(
             (category) =>
                 category.monsters.some(
                     (monster) => monster.code === monsterCode,
@@ -103,7 +101,7 @@ export class MonstersMenuComponent implements OnChanges, OnInit {
 
     resetSearch(): void {
         this._hideSearchbarResetButton();
-        this.filteredMonstersByCategory = this.monsterCategories;
+        this.filteredMonstersByCategory = this.monsterCategories();
         this.selectedCategories = [];
         this.openCurrentMonsterCategory();
         this.searchText = '';
@@ -120,7 +118,7 @@ export class MonstersMenuComponent implements OnChanges, OnInit {
 
         const filtered: MonstersByCategory[] = [];
 
-        for (const monsterCategory of this.monsterCategories) {
+        for (const monsterCategory of this.monsterCategories()) {
             const isSelected = this.selectedCategories.some(
                 (categoryCode) =>
                     categoryCode === monsterCategory.category.code,

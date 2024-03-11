@@ -3,7 +3,7 @@
         <div
             class="item"
             *ngFor="let weakspot of hoverableWeakspots">
-            <div weakspotTooltip [name]="weakspot | get_item_name:items">
+            <div weakspotTooltip [name]="weakspot | get_item_name:items()">
                 <img
                   draggable="false"
                   [src]="weakspot | assembleImagePath:'item':'thumbnail'">
