@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Resolve } from '@angular/router';
+
 import { Version } from 'src/app/models/app/version';
 import { VersionService } from '../../services/version.service';
 
 @Injectable()
-export class VersionResolver implements Resolve<Observable<Version>> {
+export class VersionResolver  {
     constructor(private _versionService: VersionService) {}
 
     resolve() {
