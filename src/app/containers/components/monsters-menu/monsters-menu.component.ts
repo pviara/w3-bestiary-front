@@ -6,6 +6,7 @@ import {
     OnChanges,
     OnInit,
     Output,
+    inject,
 } from '@angular/core';
 import { MonstersByCategory } from 'src/app/models/monster/monster';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -35,10 +36,8 @@ export class MonstersMenuComponent implements OnChanges, OnInit {
 
     selectedCategories: string[] = [];
 
-    constructor(
-        private _localStorageService: LocalStorageService,
-        private _route: ActivatedRoute,
-    ) {}
+    private _localStorageService = inject(LocalStorageService);
+    private _route = inject(ActivatedRoute);
 
     ngOnChanges() {
         this._localStorageService.langSubject.subscribe((lang) => {

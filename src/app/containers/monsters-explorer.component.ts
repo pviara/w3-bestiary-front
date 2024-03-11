@@ -1,5 +1,5 @@
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LocalStorageService } from '../services/local-storage.service';
 import { MonstersByCategory } from '../models/monster/monster';
 import { MonstersService } from './services/monsters.service';
@@ -14,12 +14,10 @@ export class MonstersExplorerComponent {
 
     hasMonsterBeenClicked = false;
 
-    constructor(
-        private _localStorageService: LocalStorageService,
-        private _monstersService: MonstersService,
-        private _route: ActivatedRoute,
-        private _router: Router,
-    ) {}
+    private _localStorageService = inject(LocalStorageService);
+    private _monstersService = inject(MonstersService);
+    private _route = inject(ActivatedRoute);
+    private _router = inject(Router);
 
     ngOnInit() {
         this._hideMonsterMenu();

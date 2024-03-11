@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Item } from 'src/app/models/item/item';
 import { ItemsService } from '../../services/items.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -22,12 +22,10 @@ export class MonsterViewerComponent {
 
     reportedTypo: Typo | null = null;
 
-    constructor(
-        private _route: ActivatedRoute,
-        private _itemsService: ItemsService,
-        private _localStorageService: LocalStorageService,
-        private _monstersService: MonstersService,
-    ) {}
+    private _itemsService = inject(ItemsService);
+    private _localStorageService = inject(LocalStorageService);
+    private _monstersService = inject(MonstersService);
+    private _route = inject(ActivatedRoute);
 
     ngOnInit() {
         this.reloadItemsWhenLangChanged();

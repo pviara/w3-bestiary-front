@@ -1,5 +1,11 @@
 import { CapitalizePipe } from '../pipes/capitalize.pipe';
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    HostListener,
+    Input,
+    inject,
+} from '@angular/core';
 
 @Directive({
     selector: '[weakspotTooltip]',
@@ -29,10 +35,8 @@ export class WeakspotTooltipDirective {
 
     private _tooltipId = 'tooltip';
 
-    constructor(
-        private capitalizePipe: CapitalizePipe,
-        private elementRef: ElementRef,
-    ) {}
+    private capitalizePipe = inject(CapitalizePipe);
+    private elementRef = inject(ElementRef);
 
     ngOnChanges() {
         if (this.name) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -9,9 +9,9 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class LangSelectorComponent implements OnInit {
     languages = ['EN', 'FR'];
 
-    private _selected!: string;
+    private _localStorageService = inject(LocalStorageService);
 
-    constructor(private _localStorageService: LocalStorageService) {}
+    private _selected!: string;
 
     ngOnInit() {
         this._selected = this._localStorageService.lang;
