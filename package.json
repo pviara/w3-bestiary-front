@@ -1,6 +1,6 @@
 {
   "name": "w3-bestiary-front",
-  "version": "2.4.2",
+  "version": "3.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

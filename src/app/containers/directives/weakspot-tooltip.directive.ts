@@ -3,8 +3,8 @@ import {
     Directive,
     ElementRef,
     HostListener,
-    Input,
     inject,
+    input,
 } from '@angular/core';
 
 @Directive({
@@ -12,8 +12,11 @@ import {
     providers: [CapitalizePipe],
 })
 export class WeakspotTooltipDirective {
-    @Input()
-    name: string | null | undefined;
+    name = input('', {
+        transform: (name: string) => {
+            return this.capitalizePipe.transform(name);
+        },
+    });
 
     @HostListener('mouseenter')
     onMouseEnter() {
@@ -38,16 +41,10 @@ export class WeakspotTooltipDirective {
     private capitalizePipe = inject(CapitalizePipe);
     private elementRef = inject(ElementRef);
 
-    ngOnChanges() {
-        if (this.name) {
-            this.name = this.capitalizePipe.transform(this.name);
-        }
-    }
-
     private _createTooltip(x: number, y: number) {
         const tooltip = document.createElement('div');
 
-        tooltip.innerHTML = `${this.name}`;
+        tooltip.innerHTML = `${this.name()}`;
         tooltip.setAttribute('class', 'tooltip');
         tooltip.style.left = `${x - 30}px`;
         tooltip.style.top = `${y - 80}px`;
