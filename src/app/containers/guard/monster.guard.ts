@@ -3,7 +3,9 @@ import { Injectable, inject } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MonstersByCategory } from 'src/app/models/monster/monster';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class MonsterGuard {
     private _monsterCodes: string[] = [];
 

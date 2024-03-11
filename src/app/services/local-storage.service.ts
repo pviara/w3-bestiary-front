@@ -8,7 +8,9 @@ import {
     MonstersByLang,
 } from '../models/monster/monster';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class LocalStorageService {
     langSubject = new BehaviorSubject(this._getExistingOrDefaultLanguage());
 

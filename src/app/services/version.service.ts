@@ -5,7 +5,9 @@ import { LocalStorageService } from './local-storage.service';
 import { tap } from 'rxjs';
 import { Version } from '../models/app/version';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class VersionService {
     private _httpClient = inject(HttpClient);
     private _localStorageService = inject(LocalStorageService);

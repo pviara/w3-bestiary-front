@@ -1,8 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
     selector: 'lang-selector',
+    standalone: true,
+    imports: [CommonModule],
     templateUrl: 'lang-selector.component.html',
     styleUrls: ['lang-selector.component.scss'],
 })
