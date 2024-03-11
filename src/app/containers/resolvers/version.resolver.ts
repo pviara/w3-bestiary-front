@@ -1,7 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { VersionService } from '../../services/version.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class VersionResolver {
     private _versionService = inject(VersionService);
 

@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { LangSelectorComponent } from './components/lang-selector.component';
+import { LocalStorageService } from './services/local-storage.service';
+import { MonstersExplorerModule } from './containers/monsters-explorer.module';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-root',
+    standalone: true,
+    imports: [LangSelectorComponent, MonstersExplorerModule, RouterOutlet],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })

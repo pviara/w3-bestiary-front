@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { Item } from 'src/app/models/item/item';
 import { ItemsService } from '../services/items.service';
-import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class ItemsResolver {
     private _itemsService = inject(ItemsService);
 

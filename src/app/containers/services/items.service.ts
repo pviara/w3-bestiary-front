@@ -5,7 +5,9 @@ import { Item } from 'src/app/models/item/item';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { of, tap } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class ItemsService {
     private _httpClient = inject(HttpClient);
     private _localStorageService = inject(LocalStorageService);
