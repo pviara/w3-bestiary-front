@@ -7,6 +7,7 @@ import {
     Output,
     Renderer2,
     ViewChild,
+    inject,
 } from '@angular/core';
 import {
     GameExpansionSet,
@@ -43,7 +44,7 @@ export class MonsterTextesDisplayerComponent implements AfterViewInit {
     @ViewChild('typoTooltip')
     private _typoTooltip!: ElementRef;
 
-    constructor(private _renderer: Renderer2) {}
+    private _renderer = inject(Renderer2);
 
     ngAfterViewInit() {
         document.body.addEventListener(

@@ -1,16 +1,14 @@
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { tap } from 'rxjs';
 import { Version } from '../models/app/version';
 
 @Injectable()
 export class VersionService {
-    constructor(
-        private _httpClient: HttpClient,
-        private _localStorageService: LocalStorageService,
-    ) {}
+    private _httpClient = inject(HttpClient);
+    private _localStorageService = inject(LocalStorageService);
 
     getVersion() {
         return this._httpClient

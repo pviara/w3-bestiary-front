@@ -1,16 +1,14 @@
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MonstersByCategory } from 'src/app/models/monster/monster';
 
 @Injectable()
-export class MonsterGuard  {
+export class MonsterGuard {
     private _monsterCodes: string[] = [];
 
-    constructor(
-        private _localStorageService: LocalStorageService,
-        private _router: Router,
-    ) {}
+    private _localStorageService = inject(LocalStorageService);
+    private _router = inject(Router);
 
     canActivate(route: ActivatedRouteSnapshot) {
         const isValidCode = this._getMonsterCodes().some(
