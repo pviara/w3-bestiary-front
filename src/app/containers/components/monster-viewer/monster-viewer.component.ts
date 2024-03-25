@@ -1,12 +1,12 @@
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { Component, inject } from '@angular/core';
-import { Item } from 'src/app/models/item/item';
+import { Item } from '../../../models/item/item';
 import { ItemsService } from '../../services/items.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Monster } from 'src/app/models/monster/monster';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { Monster } from '../../../models/monster/monster';
 import { MonstersService } from '../../services/monsters.service';
-import { Typo } from 'src/app/models/typo/typo';
+import { Typo } from '../../../models/typo/typo';
 
 @Component({
     selector: 'monster-viewer',

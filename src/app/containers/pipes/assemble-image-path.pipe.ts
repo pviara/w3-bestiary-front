@@ -1,8 +1,8 @@
-import { EntityType } from 'src/app/models/app/entity-type';
-import { ImageType } from 'src/app/models/app/image-type';
+import { EntityType } from '../../models/app/entity-type';
+import { ImageType } from '../../models/app/image-type';
+import { ItemsService } from '../services/items.service';
 import { MonstersService } from '../services/monsters.service';
 import { Pipe, PipeTransform, inject } from '@angular/core';
-import { ItemsService } from '../services/items.service';
 
 @Pipe({
     name: 'assembleImagePath',

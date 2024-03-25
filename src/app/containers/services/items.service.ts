@@ -1,8 +1,8 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Item } from 'src/app/models/item/item';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Item } from '../../models/item/item';
+import { LocalStorageService } from '../../services/local-storage.service';
 import { of, tap } from 'rxjs';
 
 @Injectable({

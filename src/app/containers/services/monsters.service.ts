@@ -1,12 +1,12 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { ImageType } from 'src/app/models/app/image-type';
+import { ImageType } from '../../models/app/image-type';
 import { Injectable, inject } from '@angular/core';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Monster, MonstersByCategory } from 'src/app/models/monster/monster';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { Monster, MonstersByCategory } from '../../models/monster/monster';
 import { of, tap } from 'rxjs';
-import { ReportTextTypoPayload } from 'src/app/models/monster/DTO/report-text-typo.payload';
-import { Typo } from 'src/app/models/typo/typo';
+import { ReportTextTypoPayload } from '../../models/monster/DTO/report-text-typo.payload';
+import { Typo } from '../../models/typo/typo';
 
 @Injectable()
 export class MonstersService {
@@ -43,9 +43,9 @@ export class MonstersService {
         }
 
         return this._httpClient
-            .get<MonstersByCategory[]>(
-                `${environment.apiURL}/monster?lang=${lang}`,
-            )
+            .get<
+                MonstersByCategory[]
+            >(`${environment.apiURL}/monster?lang=${lang}`)
             .pipe(
                 tap((monstersByCategories) =>
                     this._localStorageService.addMonstersByCategoriesToCache(
