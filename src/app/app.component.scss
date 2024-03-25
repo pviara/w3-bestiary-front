@@ -1,81 +1,81 @@
 .container {
-  height: 100vh;
-  
-  animation: fadeIn ease 0.5s;
+    height: 100vh;
 
-  background-image: url('../assets/coming-soon.png');
-  background-position: center;
-  background-repeat: no-repeat;
+    animation: fadeIn ease 0.5s;
 
-  .release-message {
-    user-select: none;
-    
-    height: 100%;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-image: url('../assets/coming-soon.png');
+    background-position: center;
+    background-repeat: no-repeat;
 
-    h2 {
-      margin: 0;
-      margin-bottom: 0.5em;
+    .release-message {
+        user-select: none;
 
-      font-weight: normal;
+        height: 100%;
 
-      letter-spacing: 0.3ch;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h2 {
+            margin: 0;
+            margin-bottom: 0.5em;
+
+            font-weight: normal;
+
+            letter-spacing: 0.3ch;
+        }
+
+        .countdown {
+            h1 {
+                font-size: 200%;
+                font-weight: bold;
+
+                letter-spacing: 0.2ch;
+            }
+        }
     }
 
-    .countdown {
-      h1 {
-        font-size: 200%;
-        font-weight: bold;
+    .content {
+        height: 100%;
 
-        letter-spacing: 0.2ch;
-      }
+        background-color: #000;
+
+        display: flex;
+        flex-direction: column;
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            margin-top: 1em;
+            margin-right: 2em;
+            margin-left: 2em;
+
+            .lang {
+                margin-right: 1.5em;
+            }
+        }
+
+        @media (min-width: 1460px) {
+            .body {
+                height: calc(100vh - 64px);
+
+                box-sizing: border-box;
+
+                padding: 2em;
+            }
+        }
+
+        @media (max-width: 1460px) {
+            .body {
+                height: calc(100vh - 64px);
+
+                box-sizing: border-box;
+
+                padding: 0.5em;
+            }
+        }
     }
-  }
-  
-  .content {
-    height: 100%;
-
-    background-color: #000;
-    
-    display: flex;
-    flex-direction: column;
-
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-
-      margin-top: 1em;
-      margin-right: 2em;
-      margin-left: 2em;
-
-      .lang {
-        margin-right: 1.5em;
-      }
-    }
-
-    @media (min-width: 1460px) {
-      .body {
-        height: calc(100vh - 64px);
-  
-        box-sizing: border-box;
-        
-        padding: 2em;
-      }
-    }
-
-    @media (max-width: 1460px) {
-      .body {
-        height: calc(100vh - 64px);
-  
-        box-sizing: border-box;
-        
-        padding: 0.5em;
-      }
-    }
-  }
 }

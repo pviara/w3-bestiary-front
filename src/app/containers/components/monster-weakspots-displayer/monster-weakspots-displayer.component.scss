@@ -8,13 +8,13 @@
         .item {
             margin: 0.5em;
             border: 3px double #2b2219;
-            
+
             @media (max-width: 1460px) {
                 img {
                     max-width: 3.5em;
                 }
             }
-            
+
             @media (min-width: 500px) {
                 img {
                     max-width: 5em;
