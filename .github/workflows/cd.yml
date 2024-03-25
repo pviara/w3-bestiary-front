@@ -28,5 +28,5 @@ jobs:
                     git reset --hard origin/main
                     npm ci
                     npm run build
-                    pm2 delete w3-bestiary
-                    pm2 start dist/w3-bestiary-front/server/server.mjs --name w3-bestiary
+                    pm2 delete witcher-app
+                    pm2 start dist/w3-bestiary-front/server/server.mjs --name witcher-app
