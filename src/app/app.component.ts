@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
       · https://github.com/pviara/w3-bestiary-back
       · https://github.com/pviara/w3-bestiary-front
 
-      API is completely free of use and some documentation is available at https://witcher.pviara.dev/apidocs
+      API is completely free of use and some documentation is available at https://witcher-api.pviara.dev/apidocs
 
 
       With this,
