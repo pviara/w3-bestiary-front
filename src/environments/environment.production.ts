@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiURL: 'https://witcher.pviara.dev/api',
+    apiURL: 'https://witcher-api.pviara.dev/api',
 };
