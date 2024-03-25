@@ -1,7 +1,8 @@
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ImageType } from '../../models/app/image-type';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Monster, MonstersByCategory } from '../../models/monster/monster';
 import { of, tap } from 'rxjs';
@@ -12,6 +13,7 @@ import { Typo } from '../../models/typo/typo';
 export class MonstersService {
     private _httpClient = inject(HttpClient);
     private _localStorageService = inject(LocalStorageService);
+    private _platformId = inject(PLATFORM_ID);
 
     assembleImagePath(code: string, imageType: ImageType) {
         return `${environment.apiURL}/monster/${imageType}?code=${code}`;
@@ -42,17 +44,20 @@ export class MonstersService {
             return of(cached);
         }
 
-        return this._httpClient
-            .get<
-                MonstersByCategory[]
-            >(`${environment.apiURL}/monster?lang=${lang}`)
-            .pipe(
-                tap((monstersByCategories) =>
-                    this._localStorageService.addMonstersByCategoriesToCache(
-                        monstersByCategories,
+        if (isPlatformBrowser(this._platformId)) {
+            return this._httpClient
+                .get<
+                    MonstersByCategory[]
+                >(`${environment.apiURL}/monster?lang=${lang}`)
+                .pipe(
+                    tap((monstersByCategories) =>
+                        this._localStorageService.addMonstersByCategoriesToCache(
+                            monstersByCategories,
+                        ),
                     ),
-                ),
-            );
+                );
+        }
+        return of([]);
     }
 
     reportTextTypo(monsterCode: string, typo: string) {
