@@ -8,7 +8,7 @@ import {
 import {
     GameExpansionSet,
     MonsterTextes,
-} from 'src/app/models/monster/monster';
+} from '../../../models/monster/monster';
 
 @Component({
     inputs: ['mousePosition'],

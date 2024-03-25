@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Item, ItemsByLang } from '../models/item/item';
 import {
     Monster,
@@ -7,6 +7,7 @@ import {
     MonstersByCategory,
     MonstersByLang,
 } from '../models/monster/monster';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
     providedIn: 'root',
@@ -14,121 +15,150 @@ import {
 export class LocalStorageService {
     langSubject = new BehaviorSubject(this._getExistingOrDefaultLanguage());
 
-    get itemsByLang(): ItemsByLang[] {
-        const itemsByLang = this._getFromStorage('itemsByLang');
-        if (!itemsByLang) {
-            throw new Error('No item by lang is stored in local storage.');
-        }
+    private platformId = inject(PLATFORM_ID);
 
-        return JSON.parse(itemsByLang) as ItemsByLang[];
+    get itemsByLang(): ItemsByLang[] {
+        if (isPlatformBrowser(this.platformId)) {
+            const itemsByLang = this._getFromStorage('itemsByLang');
+            if (!itemsByLang) {
+                throw new Error('No item by lang is stored in local storage.');
+            }
+
+            return JSON.parse(itemsByLang) as ItemsByLang[];
+        }
+        return [];
     }
 
     set itemsByLang(value: ItemsByLang[]) {
-        if (!value) {
-            return;
-        }
-        const key = 'itemsByLang';
+        if (isPlatformBrowser(this.platformId)) {
+            if (!value) {
+                return;
+            }
+            const key = 'itemsByLang';
 
-        if (this._getFromStorage(key)) {
-            localStorage.removeItem(key);
+            if (this._getFromStorage(key)) {
+                localStorage.removeItem(key);
+            }
+            localStorage.setItem(key, JSON.stringify(value));
         }
-        localStorage.setItem(key, JSON.stringify(value));
     }
 
     get lang(): string {
-        const langFromStorage = this._getFromStorage('lang');
-        if (!langFromStorage) {
-            this.lang = 'EN';
-            return this.lang;
-        }
+        if (isPlatformBrowser(this.platformId)) {
+            const langFromStorage = this._getFromStorage('lang');
+            if (!langFromStorage) {
+                this.lang = 'EN';
+                return this.lang;
+            }
 
-        return JSON.parse(langFromStorage) as string;
+            return JSON.parse(langFromStorage) as string;
+        }
+        return '';
     }
 
     set lang(value: string) {
-        if (!value) {
-            return;
-        }
-        const key = 'lang';
+        if (isPlatformBrowser(this.platformId)) {
+            if (!value) {
+                return;
+            }
+            const key = 'lang';
 
-        if (this._getFromStorage(key)) {
-            localStorage.removeItem(key);
-        }
-        localStorage.setItem(key, JSON.stringify(value));
+            if (this._getFromStorage(key)) {
+                localStorage.removeItem(key);
+            }
+            localStorage.setItem(key, JSON.stringify(value));
 
-        this.langSubject.next(value);
+            this.langSubject.next(value);
+        }
     }
 
     get monstersByCategoriesByLang(): MonstersByCategoriesByLang[] {
-        const monstersByCategoriesByLangFromStorage = this._getFromStorage(
-            'monstersByCategoriesByLang',
-        );
-        if (!monstersByCategoriesByLangFromStorage) {
-            throw new Error(
-                'No monster by category by lang is stored in local storage.',
+        if (isPlatformBrowser(this.platformId)) {
+            const monstersByCategoriesByLangFromStorage = this._getFromStorage(
+                'monstersByCategoriesByLang',
             );
-        }
+            if (!monstersByCategoriesByLangFromStorage) {
+                throw new Error(
+                    'No monster by category by lang is stored in local storage.',
+                );
+            }
 
-        return JSON.parse(
-            monstersByCategoriesByLangFromStorage,
-        ) as MonstersByCategoriesByLang[];
+            return JSON.parse(
+                monstersByCategoriesByLangFromStorage,
+            ) as MonstersByCategoriesByLang[];
+        }
+        return [];
     }
 
     set monstersByCategoriesByLang(value: MonstersByCategoriesByLang[]) {
-        if (!value) {
-            return;
-        }
-        const key = 'monstersByCategoriesByLang';
+        if (isPlatformBrowser(this.platformId)) {
+            if (!value) {
+                return;
+            }
+            const key = 'monstersByCategoriesByLang';
 
-        if (this._getFromStorage(key)) {
-            localStorage.removeItem(key);
+            if (this._getFromStorage(key)) {
+                localStorage.removeItem(key);
+            }
+            localStorage.setItem(key, JSON.stringify(value));
         }
-        localStorage.setItem(key, JSON.stringify(value));
     }
 
     get monstersByLang(): MonstersByLang[] {
-        const monstersByLangFromStorage =
-            this._getFromStorage('monstersByLang');
-        if (!monstersByLangFromStorage) {
-            throw new Error('No monster by lang is stored in local storage.');
-        }
+        if (isPlatformBrowser(this.platformId)) {
+            const monstersByLangFromStorage =
+                this._getFromStorage('monstersByLang');
+            if (!monstersByLangFromStorage) {
+                throw new Error(
+                    'No monster by lang is stored in local storage.',
+                );
+            }
 
-        return JSON.parse(monstersByLangFromStorage) as MonstersByLang[];
+            return JSON.parse(monstersByLangFromStorage) as MonstersByLang[];
+        }
+        return [];
     }
 
     set monstersByLang(value: MonstersByLang[]) {
-        if (!value) {
-            return;
-        }
-        const key = 'monstersByLang';
+        if (isPlatformBrowser(this.platformId)) {
+            if (!value) {
+                return;
+            }
+            const key = 'monstersByLang';
 
-        if (this._getFromStorage(key)) {
-            localStorage.removeItem(key);
+            if (this._getFromStorage(key)) {
+                localStorage.removeItem(key);
+            }
+            localStorage.setItem(key, JSON.stringify(value));
         }
-        localStorage.setItem(key, JSON.stringify(value));
     }
 
     get version(): string {
-        const version = this._getFromStorage('version');
-        if (!version) {
-            throw new Error('No version is stored in local storage.');
-        }
+        if (isPlatformBrowser(this.platformId)) {
+            const version = this._getFromStorage('version');
+            if (!version) {
+                throw new Error('No version is stored in local storage.');
+            }
 
-        return JSON.parse(version) as string;
+            return JSON.parse(version) as string;
+        }
+        return '';
     }
 
     set version(value: string) {
-        if (!value) {
-            return;
-        }
-        const key = 'version';
+        if (isPlatformBrowser(this.platformId)) {
+            if (!value) {
+                return;
+            }
+            const key = 'version';
 
-        if (this._getFromStorage(key)) {
-            localStorage.removeItem(key);
-        }
-        localStorage.setItem(key, JSON.stringify(value));
+            if (this._getFromStorage(key)) {
+                localStorage.removeItem(key);
+            }
+            localStorage.setItem(key, JSON.stringify(value));
 
-        this._removeCachedElements();
+            this._removeCachedElements();
+        }
     }
 
     addItemsToCache(items: Item[]): void {

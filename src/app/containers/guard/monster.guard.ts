@@ -1,7 +1,7 @@
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Injectable, inject } from '@angular/core';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { MonstersByCategory } from 'src/app/models/monster/monster';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { MonstersByCategory } from '../../models/monster/monster';
 
 @Injectable({
     providedIn: 'root',

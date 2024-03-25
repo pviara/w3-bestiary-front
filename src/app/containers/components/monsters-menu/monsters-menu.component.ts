@@ -8,8 +8,8 @@ import {
     inject,
     input,
 } from '@angular/core';
-import { MonstersByCategory } from 'src/app/models/monster/monster';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { LocalStorageService } from '../../../services/local-storage.service';
+import { MonstersByCategory } from '../../../models/monster/monster';
 
 @Component({
     selector: 'monsters-menu',

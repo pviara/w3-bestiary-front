@@ -46,7 +46,10 @@ export class MonsterWeakspots {
 }
 
 export class MonstersByCategoryCategory {
-    constructor(readonly code: string, readonly name: string) {}
+    constructor(
+        readonly code: string,
+        readonly name: string,
+    ) {}
 }
 
 export class MonsterByCategory {

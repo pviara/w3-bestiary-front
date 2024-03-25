@@ -1,6 +1,6 @@
 import { Component, OnChanges, input } from '@angular/core';
-import { Item } from 'src/app/models/item/item';
-import { MonsterWeakspots } from 'src/app/models/monster/monster';
+import { Item } from '../../../models/item/item';
+import { MonsterWeakspots } from '../../../models/monster/monster';
 
 @Component({
     selector: 'monster-weakspots-displayer',
