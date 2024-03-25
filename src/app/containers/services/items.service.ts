@@ -1,6 +1,7 @@
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Item } from '../../models/item/item';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { of, tap } from 'rxjs';
@@ -11,6 +12,7 @@ import { of, tap } from 'rxjs';
 export class ItemsService {
     private _httpClient = inject(HttpClient);
     private _localStorageService = inject(LocalStorageService);
+    private _platformId = inject(PLATFORM_ID);
 
     assembleImagePath(code: string) {
         return `${environment.apiURL}/item/thumbnail?code=${code}`;
@@ -24,13 +26,16 @@ export class ItemsService {
             return of(cached);
         }
 
-        return this._httpClient
-            .get<Item[]>(`${environment.apiURL}/item?lang=${lang}`)
-            .pipe(
-                tap((items) =>
-                    this._localStorageService.addItemsToCache(items),
-                ),
-            );
+        if (isPlatformBrowser(this._platformId)) {
+            return this._httpClient
+                .get<Item[]>(`${environment.apiURL}/item?lang=${lang}`)
+                .pipe(
+                    tap((items) =>
+                        this._localStorageService.addItemsToCache(items),
+                    ),
+                );
+        }
+        return of([]);
     }
 
     private _findItemsByLang(lang: string): Item[] | undefined {
