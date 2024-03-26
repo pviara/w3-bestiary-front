@@ -29,4 +29,4 @@ jobs:
                     npm ci
                     npm run build
                     pm2 delete witcher-app
-                    pm2 start dist/w3-bestiary-front/server/server.mjs --name witcher-app
+                    pm2 start dist/w3-bestiary-front/server/server.mjs --namespace witcher --name witcher-app
