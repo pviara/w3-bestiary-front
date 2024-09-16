@@ -12,6 +12,7 @@ import { Typo } from '../../../models/typo/typo';
     selector: 'monster-viewer',
     templateUrl: './monster-viewer.component.html',
     styleUrls: ['./monster-viewer.component.scss'],
+    providers: [MonstersService],
 })
 export class MonsterViewerComponent {
     monster!: Monster;
