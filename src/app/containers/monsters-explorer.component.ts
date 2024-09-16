@@ -8,6 +8,7 @@ import { MonstersService } from './services/monsters.service';
     selector: 'monsters-explorer',
     templateUrl: './monsters-explorer.component.html',
     styleUrls: ['./monsters-explorer.component.scss'],
+    providers: [MonstersService],
 })
 export class MonstersExplorerComponent {
     categories!: MonstersByCategory[];
